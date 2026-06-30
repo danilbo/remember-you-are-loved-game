@@ -1,0 +1,45 @@
+﻿# Godot generated cache
+.godot/
+.import/
+
+# Godot local/export files
+/android/
+export.cfg
+export_credentials.cfg
+*.translation
+
+# Export/build artifacts
+/build/
+/builds/
+/exports/
+*.pck
+*.zip
+*.apk
+*.aab
+*.exe
+*.dmg
+*.app
+*.x86_64
+*.arm64
+
+# Godot Mono / C# generated files
+.mono/
+bin/
+obj/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Local editor files
+.vscode/
+.idea/
+.vs/
+
+# OS and temporary files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+*.tmp
+*.temp

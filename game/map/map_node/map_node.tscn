@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://eokgwynddnx5"]
+
+[ext_resource type="Script" uid="uid://s8hpnk3nuxuh" path="res://game/map/map_node/map_node.gd" id="1_l6gys"]
+[ext_resource type="Texture2D" uid="uid://dp014hr47ca8p" path="res://icon.svg" id="2_uyxse"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2dgb"]
+size = Vector2(133, 131)
+
+[node name="VillageNode" type="Node2D" unique_id=1659643630]
+script = ExtResource("1_l6gys")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=866822016]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1304094019]
+position = Vector2(56.5, 55.5)
+shape = SubResource("RectangleShape2D_o2dgb")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D/CollisionShape2D" unique_id=211704350]
+texture = ExtResource("2_uyxse")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

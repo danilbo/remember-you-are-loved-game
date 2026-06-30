@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://cmfx7wkopecqk"]
+
+[ext_resource type="Texture2D" uid="uid://dp014hr47ca8p" path="res://icon.svg" id="1_pvtdr"]
+[ext_resource type="Script" uid="uid://rdf2k7r71qcg" path="res://game/ui/universal_tooltip/universal_tooltip.gd" id="1_rlpjk"]
+
+[node name="UniversalTooltip" type="PanelContainer" unique_id=1045248436]
+z_index = 500
+custom_minimum_size = Vector2(200, 0)
+script = ExtResource("1_rlpjk")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=116013249]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=663928290]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=1166889852]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_pvtdr")
+stretch_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1567556749]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.8076599, 0.57833034, 1.540184e-06, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+theme_override_font_sizes/mono_font_size = 18
+text = "Название карты будем писать здесь, ограничений по длине нет"
+fit_content = true
+
+[node name="Description" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=2098412743]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.3254902, 1, 1, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 14
+theme_override_font_sizes/bold_font_size = 14
+theme_override_font_sizes/bold_italics_font_size = 14
+theme_override_font_sizes/italics_font_size = 14
+theme_override_font_sizes/mono_font_size = 14
+text = "А тут содержится описание карты. Если вы читаете данный текст, это значит лишь то, что данные для описания карты не подгрузились и что-то пошло не так. Если же вы и не планировали что-то тут увидеть, то этот текст и должен был вас ждать."
+fit_content = true
