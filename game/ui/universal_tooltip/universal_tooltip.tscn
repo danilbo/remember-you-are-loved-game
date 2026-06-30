@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://rdf2k7r71qcg" path="res://game/ui/universal_tooltip/universal_tooltip.gd" id="1_rlpjk"]
 
 [node name="UniversalTooltip" type="PanelContainer" unique_id=1045248436]
+visible = false
 z_index = 500
 custom_minimum_size = Vector2(200, 0)
 script = ExtResource("1_rlpjk")
