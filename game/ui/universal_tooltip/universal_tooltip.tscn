@@ -2,12 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://dp014hr47ca8p" path="res://icon.svg" id="1_pvtdr"]
 [ext_resource type="Script" uid="uid://rdf2k7r71qcg" path="res://game/ui/universal_tooltip/universal_tooltip.gd" id="1_rlpjk"]
+[ext_resource type="Resource" uid="uid://c5sgjy3emhhrk" path="res://game/resources/placeholder_map_node.tres" id="2_cu1qp"]
 
 [node name="UniversalTooltip" type="PanelContainer" unique_id=1045248436]
 visible = false
 z_index = 500
 custom_minimum_size = Vector2(200, 0)
 script = ExtResource("1_rlpjk")
+widget_data = ExtResource("2_cu1qp")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=116013249]
 layout_mode = 2
