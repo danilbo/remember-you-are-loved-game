@@ -66,3 +66,7 @@ func update_tooltip_position():
 		pos.y = viewport_size.y - tooltip_size.y
 
 	universal_tooltip.global_position = pos
+
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		GlobalVariables.toggle_pause()
