@@ -6,6 +6,8 @@ const MAP_NODE_SCENE = preload("res://game/map/map_node/map_node.tscn")
 
 signal on_any_node_hovered(data : MapNodeData)
 signal on_any_node_unhovered()
+signal screen_change_requested(show: bool, request_id: int)
+signal screen_change_finished(request_id: int)
 
 var data_paths: Array[String] = [
 	"res://game/resources/default_map_node.tres",
@@ -32,6 +34,8 @@ var _drawn_lines: Array[PackedVector2Array] = []
 var _active_line := PackedVector2Array()
 var _active_line_progress := 0.0
 var _active_line_tween: Tween
+var _is_transitioning := false
+var _screen_change_request_id := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -56,7 +60,6 @@ func spawn_next_nodes(amount : int)-> void:
 	for point in target_points:
 		var node :=spawn_map_node(point)
 		possible_nodes.append(node)
-		add_child(node)
 		
 		
 
@@ -73,6 +76,8 @@ func get_points(start: Vector2, count: int) -> Array[Vector2]:
 	for i in range(count):
 		var x := start.x + x_step + randf_range(-x_random_offset, x_random_offset)
 		var y := first_y + i * y_step
+		if y < 10 or y > 500:
+			continue
 		points.append(Vector2(x, y))
 
 	return points	
@@ -101,6 +106,9 @@ func spawn_map_node(position: Vector2) -> MapNode:
 	return node
 
 func _handle_node_click(node: MapNode):
+	if _is_transitioning:
+		return
+	_is_transitioning = true
 
 	var previous_node_pos := current_pos
 	if passed_nodes.size() > 0:
@@ -114,13 +122,17 @@ func _handle_node_click(node: MapNode):
 	
 # временно
 	current_pos = node.position
-	_draw_line_over_time(previous_node_pos + 
+	await _draw_line_over_time(previous_node_pos + 
 	Vector2 (targe_center_offset, targe_center_offset), 
 		current_pos +
 		Vector2 (targe_center_offset, targe_center_offset)
 	)
+	await node.play_outline_animation()
+	await _do_screen_change(false)
 	spawn_next_nodes(3)
-		
+	_is_transitioning = false
+	_start_screen_change(true)
+				
 
 func _draw_line_over_time(from: Vector2, to: Vector2) -> void:
 	if _active_line_tween:
@@ -136,6 +148,22 @@ func _draw_line_over_time(from: Vector2, to: Vector2) -> void:
 	_active_line_tween = create_tween()
 	_active_line_tween.tween_method(_set_active_line_progress, 0.0, 1.0, draw_line_time)
 	_active_line_tween.finished.connect(_commit_active_line)
+	await _active_line_tween.finished
+
+func _do_screen_change(show: bool) -> void:
+	var request_id := _next_screen_change_request_id()
+	screen_change_requested.emit(show, request_id)
+	while true:
+		var finished_request_id: int = await screen_change_finished
+		if finished_request_id == request_id:
+			return
+
+func _start_screen_change(show: bool) -> void:
+	screen_change_requested.emit(show, _next_screen_change_request_id())
+
+func _next_screen_change_request_id() -> int:
+	_screen_change_request_id += 1
+	return _screen_change_request_id
 
 func _set_active_line_progress(value: float) -> void:
 	_active_line_progress = value

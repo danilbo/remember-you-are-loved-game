@@ -7,9 +7,11 @@ var temp_node_list : Array[MapNode] = []
 var universal_tooltip : UniversalTooltip
 
 var map_manager : MapManager
+var _screen_change_tween: Tween
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#do_change_screen_logic(false)
 	spawn_universal_tooltip()
 	spawn_map_manager()
 	map_manager.spawn_next_nodes(3)
@@ -29,6 +31,7 @@ func spawn_map_manager():
 	
 	map_manager.on_any_node_hovered.connect(_handle_node_hovered)
 	map_manager.on_any_node_unhovered.connect(_handle_node_unhovered)
+	map_manager.screen_change_requested.connect(_handle_screen_change_requested)
 	
 
 
@@ -70,3 +73,34 @@ func update_tooltip_position():
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		GlobalVariables.toggle_pause()
+
+
+func do_change_screen_logic(show : bool):
+	if _screen_change_tween:
+		_screen_change_tween.kill()
+
+	var material := $CanvasLayer/ColorRect.material as ShaderMaterial
+	var tween_duration := 0.6
+	var start_value: float = float(material.get_shader_parameter("progress"))
+	var end_value: float = 1
+		
+	if !show:
+		end_value = 0
+
+	_screen_change_tween = create_tween()
+	var tween := _screen_change_tween
+	tween.tween_method(
+		func(v):
+			material.set_shader_parameter("progress", v),
+		start_value,
+		end_value,
+		tween_duration
+	)
+	await get_tree().create_timer(tween_duration).timeout
+	if _screen_change_tween == tween:
+		_screen_change_tween = null
+
+func _handle_screen_change_requested(show: bool, request_id: int) -> void:
+	await do_change_screen_logic(show)
+	map_manager.screen_change_finished.emit(request_id)
+	

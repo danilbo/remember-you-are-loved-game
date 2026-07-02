@@ -81,7 +81,6 @@ func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		is_interactive = false
 		_do_unhover()
-		play_outline_animation()
 		sprite_2d.modulate = Color.DARK_GRAY
 		clicked.emit(self)
 
@@ -100,6 +99,7 @@ func play_outline_animation() -> void:
 	queue_redraw()
 	_outline_tween = create_tween()
 	_outline_tween.tween_method(_set_outline_progress, 0.0, 1.0, outline_draw_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	await _outline_tween.finished
 
 func clear_outline() -> void:
 	if _outline_tween:
