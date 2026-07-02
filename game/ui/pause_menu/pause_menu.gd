@@ -51,9 +51,6 @@ func _ready():
 	sfx_slider.value_changed.connect(_on_sfx_changed)
 	
 	
-	music_slider.value = GlobalVariables.music_volume
-	sfx_slider.value = GlobalVariables.sfx_volume
-
 
 func _input(event):
 	if visible and event.is_action_pressed("ui_cancel"):
@@ -90,3 +87,9 @@ func _on_music_changed(value: float):
 
 func _on_sfx_changed(value: float):
 	GlobalVariables.sfx_volume = value
+
+func sync_sliders():
+	if not is_inside_tree() or not music_slider or not sfx_slider:
+		return
+	music_slider.set_value_no_signal(GlobalVariables.music_volume)
+	sfx_slider.set_value_no_signal(GlobalVariables.sfx_volume)
