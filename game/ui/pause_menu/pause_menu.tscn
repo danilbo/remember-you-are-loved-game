@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://c878at4lkdyk"]
 
 [ext_resource type="Script" uid="uid://mqr32e41fhim" path="res://game/ui/pause_menu/pause_menu.gd" id="1_8byh7"]
+[ext_resource type="Shader" uid="uid://dpxp1hxg2lts7" path="res://game/ui/pause_menu/pause_menu_blur.gdshader" id="2_nquck"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8byh7"]
+shader = ExtResource("2_nquck")
+shader_parameter/blur_amount = 0.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8byh7"]
 bg_color = Color(0, 0, 0, 1)
@@ -8,6 +13,21 @@ bg_color = Color(0, 0, 0, 1)
 [node name="PauseMenu" type="CanvasLayer" unique_id=403015455]
 process_mode = 3
 script = ExtResource("1_8byh7")
+
+[node name="DimBackground" type="ColorRect" parent="." unique_id=1708653391]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BlurBackground" type="ColorRect" parent="." unique_id=829513353]
+material = SubResource("ShaderMaterial_8byh7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1110945264]
 anchors_preset = 15
@@ -22,12 +42,23 @@ custom_maximum_size = Vector2(0, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8byh7")
 
+[node name="PanelBackground" type="ColorRect" parent="CenterContainer/MenuPanel" unique_id=1552893879]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/MenuPanel" unique_id=1053862276]
-layout_mode = 0
-offset_left = -35.0
-offset_top = -83.0
-offset_right = 118.0
-offset_bottom = 104.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="CenterContainer/MenuPanel/VBoxContainer" unique_id=1669433013]

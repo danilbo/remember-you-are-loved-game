@@ -3,6 +3,11 @@ extends CanvasLayer
 @onready var sfx_slider = $CenterContainer/MenuPanel/VBoxContainer/HSliderSFX
 @onready var continue_btn = $CenterContainer/MenuPanel/VBoxContainer/ButtonContinue
 @onready var exit_btn = $CenterContainer/MenuPanel/VBoxContainer/ButtonExit
+@onready var menu_panel = $CenterContainer/MenuPanel
+@onready var dim_bg = $DimBackground
+@onready var blur_bg = $BlurBackground
+
+var tween: Tween
 
 func _ready():
 	visible = false
@@ -50,7 +55,15 @@ func _ready():
 	music_slider.value_changed.connect(_on_music_changed)
 	sfx_slider.value_changed.connect(_on_sfx_changed)
 	
+	# Начальное состояние фонов и панели для анимации появления
+	menu_panel.scale = Vector2(0.0, 1.0)
+	menu_panel.modulate.a = 0.0
 	
+	dim_bg.color.a = 0.0
+	blur_bg.material.set("shader_parameter/blur_amount", 0.0)
+	
+	dim_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	blur_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func _input(event):
 	if visible and event.is_action_pressed("ui_cancel"):
@@ -93,3 +106,28 @@ func sync_sliders():
 		return
 	music_slider.set_value_no_signal(GlobalVariables.music_volume)
 	sfx_slider.set_value_no_signal(GlobalVariables.sfx_volume)
+
+func play_transition(show_menu: bool):
+	if tween and tween.is_running():
+		tween.kill()
+
+	tween = create_tween().set_parallel(true)
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+
+	if show_menu:
+		tween.tween_property(menu_panel, "scale:x", 1.0, 0.35)
+		tween.tween_property(menu_panel, "modulate:a", 1.0, 0.35)
+		tween.tween_property(dim_bg, "color:a", 0.5, 0.35)
+		tween.tween_property(blur_bg.material, "shader_parameter/blur_amount", 1.0, 0.35)
+	else:
+		tween.tween_property(menu_panel, "scale:x", 0.0, 0.25)
+		tween.tween_property(menu_panel, "modulate:a", 0.0, 0.25)
+		tween.tween_property(dim_bg, "color:a", 0.0, 0.25)
+		tween.tween_property(blur_bg.material, "shader_parameter/blur_amount", 0.0, 0.25)
+		tween.chain().tween_callback(_finish_hide)
+
+
+func _finish_hide():
+	visible = false
+	GlobalVariables.on_pause = false
+	get_tree().paused = false

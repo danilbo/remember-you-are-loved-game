@@ -21,8 +21,15 @@ func toggle_pause():
 		var menu_scene = preload("res://game/ui/pause_menu/pause_menu.tscn")
 		pause_menu = menu_scene.instantiate()
 		get_tree().root.add_child(pause_menu)
-	pause_menu.visible = !pause_menu.visible
+
 	if pause_menu.visible:
-		pause_menu.sync_sliders() 
-	on_pause = pause_menu.visible
-	get_tree().paused = on_pause
+		# Меню уже видно — запускаем анимацию скрытия
+		pause_menu.play_transition(false)
+		# пауза снимется в _finish_hide() по окончании анимации
+	else:
+		# Ставим паузу сразу, меню начинает появляться
+		get_tree().paused = true
+		on_pause = true
+		pause_menu.visible = true
+		pause_menu.sync_sliders()
+		pause_menu.play_transition(true)
