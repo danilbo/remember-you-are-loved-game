@@ -17,6 +17,7 @@ class_name Player
 @export var deck_card_node : Card
 @export var main_node : Node2D
 
+signal on_player_stats_change(hp : float, energy : float, control : float, mana : float)
 
 var deck : Array[Logical_card] = [preload("res://resourses/shelter.tres").duplicate(), preload("res://resourses/godfist_save.tres").duplicate(), preload("res://resourses/panic_reduce.tres").duplicate(), preload("res://resourses/unscheduled_dayoff.tres").duplicate(), preload("res://resourses/clear_weather.tres").duplicate(), preload("res://resourses/lightning_bolt.tres").duplicate(), preload("res://resourses/storm.tres").duplicate()]#, preload("res://resourses/godlike_healing.tres").duplicate(), preload("res://resourses/godlike_healing.tres").duplicate()]
 var current_deck_delta : int = 0
@@ -28,7 +29,7 @@ var deck_node_show_ticks : int = 0
 var deck_node_show_seq : bool = false
 
 func _ready() -> void:
-	pass
+	on_player_stats_change.emit(hp, energy, control, mana)
 	#print(deck)
 
 func _process(delta: float) -> void:
@@ -52,6 +53,8 @@ func change_characteristics(energy_delta : float = 0., mana_delta : float = 0., 
 	mana = clampf(mana, 0., 100.)
 	control = clampf(control, 0., 100.)
 	hp = clampf(hp, 0., 100.)
+	
+	on_player_stats_change.emit(hp, energy, control, mana)
 	
 	if hp == 0:
 		die()
@@ -247,33 +250,6 @@ func item_trigger(item_name : String) -> bool:
 			
 	return false
 	
-
-func shelter_trigger() -> bool:
-	for i : Card in main_node.card_array:
-		if i.logical_res.name == "Самодельное убежище" and i.logical_res.position == i.logical_res.POSITIONS.PASSSIVE:
-			for j in buff_card_place1.linked_nodes:
-				if j[0] == i:
-					buff_card_place1.remove_element_at_index(j[1])
-					break
-					
-			i.send_to_grave()
-			return true
-			
-	return false
-
-
-func camo_trigger() -> bool:
-	for i : Card in main_node.card_array:
-		if i.logical_res.name == "Маскировка" and i.logical_res.position == i.logical_res.POSITIONS.PASSSIVE:
-			for j in buff_card_place1.linked_nodes:
-				if j[0] == i:
-					buff_card_place1.remove_element_at_index(j[1])
-					break
-					
-			i.send_to_grave()
-			return true
-			
-	return false
 
 
 func _on_button_pressed() -> void:

@@ -54,16 +54,16 @@ func _draw() -> void:
 	if _active_line.size() == 2:
 		_draw_dashed_line(_active_line[0], _active_line[1], _active_line_progress)
 	
-func spawn_next_nodes(amount : int)-> void:
+func spawn_next_nodes(amount : int) -> Array[MapNode]:
 	var target_points := get_points(current_pos, amount)
 	possible_nodes.clear()
 	for point in target_points:
 		var node :=spawn_map_node(point)
 		possible_nodes.append(node)
 		
-		
-
-		
+	
+	return possible_nodes
+	
 	
 func get_points(start: Vector2, count: int) -> Array[Vector2]:
 	var points: Array[Vector2] = []
@@ -129,7 +129,6 @@ func _handle_node_click(node: MapNode):
 	)
 	await node.play_outline_animation()
 	await _do_screen_change(false)
-	spawn_next_nodes(3)
 	_is_transitioning = false
 	_start_screen_change(true)
 				

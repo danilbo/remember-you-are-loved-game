@@ -3,6 +3,8 @@ extends Node2D
 const MAP_MANAGER_SCENE = preload("res://game/map/map_manager/map_manager.tscn")
 const TOOLTIP_SCENE = preload("res://game/ui/universal_tooltip/universal_tooltip.tscn")
 
+@export var main_gameplay_node : RootNode
+
 @onready var hud_widget: HudWidget = $CanvasLayer/HudWidget
 
 var temp_node_list : Array[MapNode] = []
@@ -12,9 +14,14 @@ var _screen_change_tween: Tween
 
 func _ready() -> void:
 	#hud_widget.set_visible(false)
+	player_stats_updated(100., 100., 100., 100.)
 	spawn_universal_tooltip()
 	spawn_map_manager()
 	map_manager.spawn_next_nodes(3)
+	main_gameplay_node.player_node_ext.on_player_stats_change.connect(player_stats_updated)
+	main_gameplay_node.on_level_end.connect(on_level_end)
+	main_gameplay_node.on_card_hovered.connect(_handler_on_card_hover)
+	main_gameplay_node.on_card_unhovered.connect(_handler_on_card_unhover)
 
 func _process(delta: float) -> void:
 	if universal_tooltip and universal_tooltip.visible:
@@ -87,6 +94,7 @@ func do_change_screen_logic(show : bool):
 
 	if !show:
 		end_value = 0
+		
 
 	_screen_change_tween = create_tween()
 	var tween := _screen_change_tween
@@ -104,3 +112,51 @@ func do_change_screen_logic(show : bool):
 func _handle_screen_change_requested(show: bool, request_id: int) -> void:
 	await do_change_screen_logic(show)
 	map_manager.screen_change_finished.emit(request_id)
+	on_fade_change(show, request_id)
+
+
+func on_fade_change(show : bool, request_id : int):
+	if not show:
+		main_gameplay_node.show()
+		map_manager.hide()
+			
+
+
+func player_stats_updated(hp : float, energy : float, control : float, mana : float):
+	if mana != hud_widget.mana_value:
+		hud_widget.set_mana_value(mana)
+		
+	if hp != hud_widget.hp_value:
+		hud_widget.set_hp_value(hp)
+		
+	if energy != hud_widget.energy_value:
+		hud_widget.set_energy_value(energy)
+		
+	if control != hud_widget.control_value:
+		hud_widget.set_control_value(control)
+
+
+
+func on_level_end() -> void:
+	await do_change_screen_logic(false)
+	main_gameplay_node.hide()
+	map_manager.show()
+	do_change_screen_logic(true)
+	var new_nodes = map_manager.spawn_next_nodes(3)
+	#print(new_nodes)
+	
+	
+func _handler_on_card_hover(icon : Texture2D, res_name : String, desc : String):
+	var data : MapNodeData = MapNodeData.new()
+	
+	data.description = desc
+	data.icon = icon
+	data.title = res_name
+	
+	if !data:
+		return
+	universal_tooltip.set_data(data)
+	universal_tooltip.visible = true
+	
+func _handler_on_card_unhover():
+	universal_tooltip.visible = false

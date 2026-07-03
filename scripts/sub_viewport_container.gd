@@ -75,6 +75,9 @@ var rotation_def : Vector2 = Vector2.ZERO
 var termination_seq : bool = false
 var termination_ticks : int = 0
 
+signal on_hovered(icon : Texture2D, res_name : String, desc : String)
+signal on_unhovered()
+
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: PackedStringArray = []
 	if not front_art:
@@ -262,16 +265,20 @@ func play() -> void:
 
 func _on_mouse_entered() -> void:
 	if not mouse_on:
+		if logical_res != null:
+			on_hovered.emit(logical_res.icon, logical_res.name, logical_res.desctiption)
 		mouse_on = true
 
 
 func _on_mouse_exited() -> void:
 	if mouse_on:
+		if logical_res != null:
+			on_unhovered.emit()
 		mouse_on = false
 
 
 func get_correct_mouse_delta() -> Vector2:
-	return get_viewport().get_mouse_position() - (get_viewport_rect().size / 2.) - global_position - ((size * scale) / 2.)
+	return get_viewport().get_mouse_position() - (get_viewport_rect().size / 2.) - position - ((size * scale) / 2.)
 
 
 func _on_gui_input(event: InputEvent) -> void:

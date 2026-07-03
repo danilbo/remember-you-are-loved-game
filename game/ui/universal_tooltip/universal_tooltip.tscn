@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cmfx7wkopecqk"]
 
-[ext_resource type="Texture2D" uid="uid://dp014hr47ca8p" path="res://icon.svg" id="1_pvtdr"]
+[ext_resource type="Texture2D" uid="uid://ct3dc0p8o6tkb" path="res://icon.svg" id="1_pvtdr"]
 [ext_resource type="Script" uid="uid://rdf2k7r71qcg" path="res://game/ui/universal_tooltip/universal_tooltip.gd" id="1_rlpjk"]
 [ext_resource type="Resource" uid="uid://c5sgjy3emhhrk" path="res://game/resources/placeholder_map_node.tres" id="2_cu1qp"]
 
@@ -18,10 +18,12 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=1166889852]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("1_pvtdr")
-stretch_mode = 2
+expand_mode = 1
+stretch_mode = 6
 
 [node name="Title" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1567556749]
 layout_mode = 2

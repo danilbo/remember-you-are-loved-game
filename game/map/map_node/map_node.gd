@@ -1,6 +1,8 @@
 extends Node2D
 class_name MapNode 
 
+enum DOT_TYPES{SHOP, LEVEL}
+
 @export var data: MapNodeData
 @export var title: String = ""
 @export_multiline var description: String = ""
@@ -15,6 +17,7 @@ class_name MapNode
 @export var outline_padding: float = 16.0
 @export var outline_draw_time: float = 0.45
 @export var outline_wobble: float = 4.0
+@export var dot_type : DOT_TYPES
 
 @onready var area_2d: Area2D = $Area2D
 @onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D

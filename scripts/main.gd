@@ -1,12 +1,23 @@
 extends Node2D
 
+class_name RootNode
+
 @onready var card_node = preload("res://scenes/card_ex.tscn")
 @onready var res_test = preload("res://resourses/godlike_healing.tres")
 @onready var ultimate_box_container = $Utimate_box_container
+@onready var player_node_ext : Player = %Player
 
 
 @export var god_card_texture : Texture2D
 @export var hero_card_texture : Texture2D
+
+@export var main_node : Node2D
+
+
+signal on_level_end()
+
+signal on_card_hovered(icon : Texture2D, res_name : String, desc : String)
+signal on_card_unhovered()
 
 var card_array : Array[Card] = []
 # Called when the node enters the scene tree for the first time.
@@ -16,13 +27,18 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		%Player.die()
+	pass
+	#if Input.is_action_just_pressed("ui_accept"):
+	#	%Player.draw_random_card()
+		#%Player.die()
 		#%Player.draw_random_card()
 		
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_left"):
 		%Player.draw_random_card()
 		#ultimate_box_container.remove_element_at_index(1)
+		
+	if Input.is_action_just_pressed("ui_right"):
+		on_level_end.emit()
 
 
 func spawn_card(card_logic_res, container) -> void:
@@ -32,6 +48,8 @@ func spawn_card(card_logic_res, container) -> void:
 	container.add_element(new_card)
 	new_card.position = $Card_graph_content.position
 	
+	new_card.on_hovered.connect(_handle_on_hovered)
+	new_card.on_unhovered.connect(_handle_on_unhovered)
 	
 	var new_scale = 0.55
 	new_card.scale.x = new_scale
@@ -57,3 +75,10 @@ func spawn_card(card_logic_res, container) -> void:
 	new_card.player_node = %Player
 	
 	new_card.generate_from_resource()
+
+
+func _handle_on_hovered(icon : Texture2D, res_name : String, desc : String):
+	on_card_hovered.emit(icon, res_name, desc)
+	
+func _handle_on_unhovered():
+	on_card_unhovered.emit()
