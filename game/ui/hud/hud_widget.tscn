@@ -1,6 +1,48 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7x80rdqfeh2s"]
+[gd_scene load_steps=7 format=3 uid="uid://c7x80rdqfeh2s"]
 
 [ext_resource type="Script" path="res://game/ui/hud/hud_widget.gd" id="1_3plaq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_border"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_bg"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mana_fill"]
+bg_color = Color(0, 0.66, 0.92, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_fill"]
+bg_color = Color(0.1, 0.68, 0.28, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_energy_fill"]
+bg_color = Color(1, 0.93, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_control_fill"]
+bg_color = Color(0.62, 0.22, 0.66, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="HudWidget" type="Control"]
 layout_mode = 3
@@ -77,6 +119,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ManaBar" type="Control" parent="Content"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 220.0
 offset_top = 32.0
@@ -84,7 +127,7 @@ offset_right = 390.0
 offset_bottom = 56.0
 mouse_filter = 2
 
-[node name="Border" type="ColorRect" parent="Content/ManaBar"]
+[node name="Border" type="Panel" parent="Content/ManaBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -92,9 +135,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(1, 1, 1, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_bar_border")
 
-[node name="Background" type="ColorRect" parent="Content/ManaBar"]
+[node name="Background" type="Panel" parent="Content/ManaBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_left = 0.0235294
@@ -104,15 +147,15 @@ anchor_bottom = 0.833333
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_bar_bg")
 
-[node name="ManaFill" type="ColorRect" parent="Content/ManaBar/Background"]
+[node name="ManaFill" type="Panel" parent="Content/ManaBar/Background"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 0.0
 offset_bottom = 16.0
 mouse_filter = 2
-color = Color(0, 0.66, 0.92, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_mana_fill")
 
 [node name="SoulLabel" type="Label" parent="Content"]
 layout_mode = 0
@@ -146,6 +189,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HpBar" type="Control" parent="Content"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 8.0
 offset_top = 92.0
@@ -153,7 +197,7 @@ offset_right = 178.0
 offset_bottom = 116.0
 mouse_filter = 2
 
-[node name="Border" type="ColorRect" parent="Content/HpBar"]
+[node name="Border" type="Panel" parent="Content/HpBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -161,9 +205,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(1, 1, 1, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_bar_border")
 
-[node name="Background" type="ColorRect" parent="Content/HpBar"]
+[node name="Background" type="Panel" parent="Content/HpBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_left = 0.0235294
@@ -173,15 +217,15 @@ anchor_bottom = 0.833333
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_bar_bg")
 
-[node name="HpFill" type="ColorRect" parent="Content/HpBar/Background"]
+[node name="HpFill" type="Panel" parent="Content/HpBar/Background"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 0.0
 offset_bottom = 16.0
 mouse_filter = 2
-color = Color(0.1, 0.68, 0.28, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_hp_fill")
 
 [node name="HpLabel" type="Label" parent="Content"]
 layout_mode = 0
@@ -199,6 +243,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EnergyBar" type="Control" parent="Content"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 220.0
 offset_top = 92.0
@@ -206,7 +251,7 @@ offset_right = 390.0
 offset_bottom = 116.0
 mouse_filter = 2
 
-[node name="Border" type="ColorRect" parent="Content/EnergyBar"]
+[node name="Border" type="Panel" parent="Content/EnergyBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -214,9 +259,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(1, 1, 1, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_bar_border")
 
-[node name="Background" type="ColorRect" parent="Content/EnergyBar"]
+[node name="Background" type="Panel" parent="Content/EnergyBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_left = 0.0235294
@@ -226,15 +271,15 @@ anchor_bottom = 0.833333
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_bar_bg")
 
-[node name="EnergyFill" type="ColorRect" parent="Content/EnergyBar/Background"]
+[node name="EnergyFill" type="Panel" parent="Content/EnergyBar/Background"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 0.0
 offset_bottom = 16.0
 mouse_filter = 2
-color = Color(1, 0.93, 0, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_energy_fill")
 
 [node name="EnergyLabel" type="Label" parent="Content"]
 layout_mode = 0
@@ -252,6 +297,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ControlBar" type="Control" parent="Content"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 440.0
 offset_top = 92.0
@@ -259,7 +305,7 @@ offset_right = 610.0
 offset_bottom = 116.0
 mouse_filter = 2
 
-[node name="Border" type="ColorRect" parent="Content/ControlBar"]
+[node name="Border" type="Panel" parent="Content/ControlBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -267,9 +313,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(1, 1, 1, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_bar_border")
 
-[node name="Background" type="ColorRect" parent="Content/ControlBar"]
+[node name="Background" type="Panel" parent="Content/ControlBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_left = 0.0235294
@@ -279,15 +325,15 @@ anchor_bottom = 0.833333
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0, 0, 0, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_bar_bg")
 
-[node name="ControlFill" type="ColorRect" parent="Content/ControlBar/Background"]
+[node name="ControlFill" type="Panel" parent="Content/ControlBar/Background"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 0.0
 offset_bottom = 16.0
 mouse_filter = 2
-color = Color(0.62, 0.22, 0.66, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_control_fill")
 
 [node name="ControlLabel" type="Label" parent="Content"]
 layout_mode = 0

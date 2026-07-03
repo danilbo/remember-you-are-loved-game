@@ -11,8 +11,7 @@ var map_manager : MapManager
 var _screen_change_tween: Tween
 
 func _ready() -> void:
-	hud_widget.set_visible(false)
-	#hud_widget.set_value(&"mana", 10)
+	#hud_widget.set_visible(false)
 	spawn_universal_tooltip()
 	spawn_map_manager()
 	map_manager.spawn_next_nodes(3)
@@ -20,6 +19,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if universal_tooltip and universal_tooltip.visible:
 		update_tooltip_position()
+	if Input.is_action_just_pressed("DebugAction"):
+		hud_widget.set_value(&"mana", hud_widget.mana_value + 10)
 
 func spawn_map_manager():
 	if map_manager:
