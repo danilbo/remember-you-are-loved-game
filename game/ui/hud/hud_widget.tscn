@@ -1,0 +1,305 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7x80rdqfeh2s"]
+
+[ext_resource type="Script" path="res://game/ui/hud/hud_widget.gd" id="1_3plaq"]
+
+[node name="HudWidget" type="Control"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 150.0
+grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource("1_3plaq")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 150.0
+grow_horizontal = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Content" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_top = 6.0
+offset_right = 320.0
+offset_bottom = 146.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="HourglassIcon" type="Label" parent="Content"]
+layout_mode = 0
+offset_left = 12.0
+offset_right = 66.0
+offset_bottom = 64.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 42
+text = "⌛"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HourglassValue" type="Label" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 70.0
+offset_top = 12.0
+offset_right = 130.0
+offset_bottom = 56.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 34
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ManaLabel" type="Label" parent="Content"]
+layout_mode = 0
+offset_left = 250.0
+offset_right = 370.0
+offset_bottom = 22.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 18
+text = "mana"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ManaBar" type="Control" parent="Content"]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 32.0
+offset_right = 390.0
+offset_bottom = 56.0
+mouse_filter = 2
+
+[node name="Border" type="ColorRect" parent="Content/ManaBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+
+[node name="Background" type="ColorRect" parent="Content/ManaBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0235294
+anchor_top = 0.166667
+anchor_right = 0.976471
+anchor_bottom = 0.833333
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ManaFill" type="ColorRect" parent="Content/ManaBar/Background"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 0.0
+offset_bottom = 16.0
+mouse_filter = 2
+color = Color(0, 0.66, 0.92, 1)
+
+[node name="SoulLabel" type="Label" parent="Content"]
+layout_mode = 0
+offset_left = 405.0
+offset_top = 16.0
+offset_right = 535.0
+offset_bottom = 56.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 32
+text = "(soul)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SoulValue" type="Label" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 532.0
+offset_top = 14.0
+offset_right = 602.0
+offset_bottom = 56.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 34
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HpBar" type="Control" parent="Content"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 92.0
+offset_right = 178.0
+offset_bottom = 116.0
+mouse_filter = 2
+
+[node name="Border" type="ColorRect" parent="Content/HpBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+
+[node name="Background" type="ColorRect" parent="Content/HpBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0235294
+anchor_top = 0.166667
+anchor_right = 0.976471
+anchor_bottom = 0.833333
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="HpFill" type="ColorRect" parent="Content/HpBar/Background"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 0.0
+offset_bottom = 16.0
+mouse_filter = 2
+color = Color(0.1, 0.68, 0.28, 1)
+
+[node name="HpLabel" type="Label" parent="Content"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 116.0
+offset_right = 138.0
+offset_bottom = 140.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 18
+text = "hp"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnergyBar" type="Control" parent="Content"]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 92.0
+offset_right = 390.0
+offset_bottom = 116.0
+mouse_filter = 2
+
+[node name="Border" type="ColorRect" parent="Content/EnergyBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+
+[node name="Background" type="ColorRect" parent="Content/EnergyBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0235294
+anchor_top = 0.166667
+anchor_right = 0.976471
+anchor_bottom = 0.833333
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="EnergyFill" type="ColorRect" parent="Content/EnergyBar/Background"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 0.0
+offset_bottom = 16.0
+mouse_filter = 2
+color = Color(1, 0.93, 0, 1)
+
+[node name="EnergyLabel" type="Label" parent="Content"]
+layout_mode = 0
+offset_left = 252.0
+offset_top = 116.0
+offset_right = 362.0
+offset_bottom = 140.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 18
+text = "energy"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ControlBar" type="Control" parent="Content"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 92.0
+offset_right = 610.0
+offset_bottom = 116.0
+mouse_filter = 2
+
+[node name="Border" type="ColorRect" parent="Content/ControlBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+
+[node name="Background" type="ColorRect" parent="Content/ControlBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_left = 0.0235294
+anchor_top = 0.166667
+anchor_right = 0.976471
+anchor_bottom = 0.833333
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ControlFill" type="ColorRect" parent="Content/ControlBar/Background"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 0.0
+offset_bottom = 16.0
+mouse_filter = 2
+color = Color(0.62, 0.22, 0.66, 1)
+
+[node name="ControlLabel" type="Label" parent="Content"]
+layout_mode = 0
+offset_left = 462.0
+offset_top = 116.0
+offset_right = 592.0
+offset_bottom = 140.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 18
+text = "control"
+horizontal_alignment = 1
+vertical_alignment = 1
