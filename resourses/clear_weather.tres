@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Logical_card" load_steps=3 format=3 uid="uid://cwm2rcnsvijmh"]
+
+[ext_resource type="Texture2D" uid="uid://hn4x26em3wtj" path="res://sprites/IMG_3399.PNG" id="1_s4cfq"]
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="1_u7kqu"]
+
+[resource]
+script = ExtResource("1_u7kqu")
+dumb_card = true
+casting_type = 1
+name = "Хорошая погода"
+duration = 2
+mana = -15.0
+special_triggers = ["good_weather"]
+control_buff = 7.0
+panic_buff = -7.0
+icon = ExtResource("1_s4cfq")

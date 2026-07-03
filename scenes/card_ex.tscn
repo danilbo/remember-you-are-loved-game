@@ -1,0 +1,115 @@
+[gd_scene load_steps=10 format=3 uid="uid://sxf4u5hhw3o6"]
+
+[ext_resource type="Shader" uid="uid://c5nxr6gk616x4" path="res://shaders/card_rofl.gdshader" id="1_s5fbw"]
+[ext_resource type="Script" uid="uid://df3ap4aggedit" path="res://scripts/sub_viewport_container.gd" id="1_weuor"]
+[ext_resource type="Texture2D" uid="uid://boj58otp8tewm" path="res://sprites/IMG_3428.PNG" id="3_1n0jw"]
+[ext_resource type="Texture2D" uid="uid://de7ev1vo2t4hy" path="res://sprites/IMG_3430.PNG" id="3_256pd"]
+[ext_resource type="Shader" uid="uid://cvlglj5rt6h33" path="res://shaders/vibecoded_bullshiet.gdshader" id="4_wst30"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s5fbw"]
+shader = ExtResource("1_s5fbw")
+shader_parameter/cull_backface = false
+shader_parameter/use_front = false
+shader_parameter/fov = 60.0
+shader_parameter/rot_y_deg = 180.0
+shader_parameter/rot_x_deg = 0.0
+shader_parameter/inset = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qv8yc"]
+shader = ExtResource("4_wst30")
+shader_parameter/cull_backface = false
+shader_parameter/use_front = true
+shader_parameter/fov = 60.0
+shader_parameter/rot_y_deg = 180.0
+shader_parameter/rot_x_deg = 0.0
+shader_parameter/inset = 0.0
+shader_parameter/corner_blur_strength = 0.4
+shader_parameter/corner_blur_size = 0.25
+shader_parameter/blur_samples = 8
+shader_parameter/edge_softness = 0.1070000050825
+
+[sub_resource type="Gradient" id="Gradient_lo1wj"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jsxri"]
+gradient = SubResource("Gradient_lo1wj")
+fill_to = Vector2(0, 0)
+
+[node name="Card_graph_content" type="SubViewportContainer" node_paths=PackedStringArray("icon_texture_rect", "art_texture_rect", "card_contents", "shadow_node")]
+material = SubResource("ShaderMaterial_s5fbw")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -744.0
+offset_bottom = -190.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(108, 175)
+mouse_target = true
+script = ExtResource("1_weuor")
+icon_texture_rect = NodePath("SubViewport/Control/TextureRect")
+front_art = ExtResource("3_1n0jw")
+back_art = ExtResource("3_256pd")
+art_texture_rect = NodePath("SubViewport/TextureRect")
+card_contents = NodePath("SubViewport/Control")
+rotation_y = 180.0
+shadow_node = NodePath("Sprite2D")
+shadow_offset_mult = Vector2(0.015, 0.01)
+light_source_coords = Vector2(0, 150)
+scale_play_animation_mult = 1.2
+pulse_ticks_const = 30
+use_bigger_card = true
+metadata/_custom_type_script = "uid://df3ap4aggedit"
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(216, 350)
+render_target_update_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 394.0
+offset_bottom = 638.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.354, 0.354)
+texture = ExtResource("3_256pd")
+
+[node name="Control" type="Control" parent="SubViewport"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 18.7
+
+[node name="Label" type="Label" parent="SubViewport/Control"]
+visible = false
+layout_mode = 0
+offset_left = 30.0
+offset_top = 189.0
+offset_right = 158.0
+offset_bottom = 212.0
+text = "Name_text"
+
+[node name="TextureRect" type="TextureRect" parent="SubViewport/Control"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 13.0
+offset_right = 208.0
+offset_bottom = 183.0
+scale = Vector2(0.35, 0.35)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_qv8yc")
+position = Vector2(108, 175)
+scale = Vector2(4, 6.286)
+texture = SubResource("GradientTexture2D_jsxri")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
