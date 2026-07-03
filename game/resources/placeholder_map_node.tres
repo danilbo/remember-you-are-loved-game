@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MapNodeData" format=3 uid="uid://c5sgjy3emhhrk"]
 
-[ext_resource type="Texture2D" uid="uid://ct3dc0p8o6tkb" path="res://icon.svg" id="1_j31ht"]
+[ext_resource type="Texture2D" uid="uid://dp014hr47ca8p" path="res://icon.svg" id="1_j31ht"]
 [ext_resource type="Script" uid="uid://bopi0mx3b5s1s" path="res://game/resources/map_node_data.gd" id="2_o5d6e"]
 
 [resource]

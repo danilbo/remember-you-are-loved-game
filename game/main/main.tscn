@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://70vt0f4c546l"]
+
+[ext_resource type="Script" uid="uid://bge5lcmdnbrg2" path="res://game/main/main.gd" id="1_5520f"]
+[ext_resource type="Shader" uid="uid://b2311g43c6gx6" path="res://game/main/screen_fadeout_shader.gdshader" id="2_psm6y"]
+[ext_resource type="Texture2D" uid="uid://cirht3wr1hxnh" path="res://game/assets/noises/shader_noise_image.jpg" id="3_yil3p"]
+[ext_resource type="PackedScene" uid="uid://c7x80rdqfeh2s" path="res://game/ui/hud/hud_widget.tscn" id="4_dsy3x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5520f"]
+shader = ExtResource("2_psm6y")
+shader_parameter/noise = ExtResource("3_yil3p")
+shader_parameter/progress = 1.0
+
+[node name="Main" type="Node2D" unique_id=581666908]
+script = ExtResource("1_5520f")
+metadata/_edit_horizontal_guides_ = [-14237676.0]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1219891613]
+
+[node name="HudWidget" parent="CanvasLayer" unique_id=1154191608 instance=ExtResource("4_dsy3x")]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=305870142]
+material = SubResource("ShaderMaterial_5520f")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

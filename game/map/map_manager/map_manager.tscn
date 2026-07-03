@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dk5vrwufkvvh6"]
+
+[ext_resource type="Script" uid="uid://bastcrfmdujfq" path="res://game/map/map_manager/map_manager.gd" id="1_l7mop"]
+
+[node name="MapManager" type="Node2D" unique_id=761217659]
+script = ExtResource("1_l7mop")

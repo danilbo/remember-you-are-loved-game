@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MapNodeData" format=3 uid="uid://mxlufpdl48kt"]
+
+[ext_resource type="Script" uid="uid://bopi0mx3b5s1s" path="res://game/resources/map_node_data.gd" id="1_i78ue"]
+[ext_resource type="Texture2D" uid="uid://dp014hr47ca8p" path="res://icon.svg" id="1_lhuff"]
+
+[resource]
+script = ExtResource("1_i78ue")
+title = "Дефолтный Тултип"
+description = "Данный тексбокс будет использован для отображения доп. информации при наведении на иконки и т.д.Данный модуль должен содержать: место для картинки, название и описание.Также требуется предусмотреть, чтобы текстбокс не вылезал за границы экрана и сдвигался, относительно этих границ."
+icon = ExtResource("1_lhuff")
