@@ -37,9 +37,12 @@ signal on_card_hovered(icon : Texture2D, res_name : String, desc : String)
 signal on_card_unhovered()
 
 var card_array : Array[Card] = []
+
+signal on_village_stats_change(citizens : int, current_panic : float, farmers : int, food : int, buildings : int, buildings_size : int)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	player_node_ext.village.on_stat_change.connect(on_village_stat_change)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -187,3 +190,8 @@ func reassign_for_village_type():
 			village_sprite1.texture = village_texture1
 			village_sprite2.texture = village_texture2
 			village_sprite3.texture = village_texture3
+
+
+
+func on_village_stat_change(citizens : int, current_panic : float, farmers : int, food : int, buildings : int, buildings_size : int):
+	on_village_stats_change.emit(citizens, current_panic, farmers, food, buildings, buildings_size)

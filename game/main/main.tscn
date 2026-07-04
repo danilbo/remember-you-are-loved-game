@@ -8,7 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://cemby01toyhng" path="res://game/ui/village_widget/village_widget.tscn" id="5_kk62w"]
 [ext_resource type="PackedScene" uid="uid://cn2due6g2h7cj" path="res://scenes/root.tscn" id="5_tkdpa"]
 [ext_resource type="PackedScene" uid="uid://6w6hr2d4mgia" path="res://scenes/shop.tscn" id="6_yymkh"]
+[ext_resource type="Texture2D" uid="uid://45365gcs28kc" path="res://sprites/IMG_3509.PNG" id="7_7q7ho"]
 [ext_resource type="AudioStream" uid="uid://cq8y1yc4drled" path="res://game/assets/sounds/music/GaymeMain2.ogg" id="7_sifka"]
+[ext_resource type="Texture2D" uid="uid://bda2q10uc1wo6" path="res://sprites/IMG_3508.PNG" id="8_els08"]
+[ext_resource type="Texture2D" uid="uid://bmtxtnb5hvgy5" path="res://sprites/IMG_3507.PNG" id="9_6idrh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5520f"]
 shader = ExtResource("2_psm6y")
@@ -51,6 +54,9 @@ color = Color(0, 0, 0, 1)
 visible = false
 position = Vector2(960, 540)
 shop_node = NodePath("../Shop")
+camp_texture1 = ExtResource("7_7q7ho")
+camp_texture2 = ExtResource("8_els08")
+camp_texture3 = ExtResource("9_6idrh")
 
 [node name="Shop" parent="." unique_id=2134154319 node_paths=PackedStringArray("main_gameplay_node") instance=ExtResource("6_yymkh")]
 visible = false

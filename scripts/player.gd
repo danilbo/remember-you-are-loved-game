@@ -256,6 +256,8 @@ func interact_with_village(kills : int, demolish_houses : int, kill_type, panic_
 	for i in range(0, demolish_houses):
 		village.demolish_building(kill_type)
 	
+	
+	village.on_stat_change.emit(village.citizens, village.current_panic, village.farmers, village.food, village.buildings, village.buildings_size)
 
 
 func new_turn() -> void:
