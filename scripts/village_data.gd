@@ -28,6 +28,8 @@ var unscheduled_dayoff : bool = false
 var confused : bool = false
 var ending_level : bool = false
 
+signal on_stat_change(citizens : int, current_panic : float, farmers : int, food : int, buildings : int, buildings_size : int)
+
 func _ready() -> void:
 	generate(1)
 
@@ -45,6 +47,8 @@ func load_from_res(resource : Village_resourse):
 	unscheduled_dayoff = false
 	confused = false
 	ending_level = false
+	
+	on_stat_change.emit(citizens, current_panic, farmers, food, buildings, buildings_size)
 
 func generate(level : int):
 	current_panic = 0.
@@ -74,13 +78,15 @@ func generate(level : int):
 				farmers = citizens
 		
 	current_level = level
-	print("citizens = ", citizens)
-	print("farmers = ", farmers)
-	print("buildings amount = ", buildings)
-	print("buildings_size = ", buildings_size)
-	print("food amount = ", food)
-	print("food_gain_eff = ", food_gain_eff)
-	print()
+	
+	on_stat_change.emit(citizens, current_panic, farmers, food, buildings, buildings_size)
+	#print("citizens = ", citizens)
+	#print("farmers = ", farmers)
+	#print("buildings amount = ", buildings)
+	#print("buildings_size = ", buildings_size)
+	#print("food amount = ", food)
+	#print("food_gain_eff = ", food_gain_eff)
+	#print()
 	
 	
 func tick():
@@ -100,7 +106,7 @@ func tick():
 			kill_citizen(KILL_TYPE.ACCIDENT, 0)
 			
 			
-	print("food left before harvest = ", food)
+	#print("food left before harvest = ", food)
 	
 	if not unscheduled_dayoff:
 		food += float(farmers) * food_gain_eff
@@ -108,14 +114,16 @@ func tick():
 	else:
 		unscheduled_dayoff = false
 	
-	print("food left after harvest = ", food)
+	#print("food left after harvest = ", food)
 	
 	current_panic -= randf_range(0.5, 3.)
 	current_panic = clampf(current_panic, 0., 100.)
 	
-	print("panic redused, current panic = ", current_panic)
+	#print("panic redused, current panic = ", current_panic)
 	
-	print()
+	on_stat_change.emit(citizens, current_panic, farmers, food, buildings, buildings_size)
+	
+	#print()
 
 
 func kill_citizen(kill_type : KILL_TYPE, citizen_type = -1):
@@ -123,32 +131,32 @@ func kill_citizen(kill_type : KILL_TYPE, citizen_type = -1):
 		-1:
 			if randi_range(0, 1) == 0 and farmers != citizens or farmers == 0:
 				citizens -= 1
-				print("citizen killed")
+				#print("citizen killed")
 				
 			else:
 				citizens -= 1
 				farmers -= 1
-				print("farmer killed")
+				#print("farmer killed")
 				
 		0:
 			if citizens != farmers:
 				citizens -= 1
-				print("citizen killed")
+				#print("citizen killed")
 			
 			else:
 				citizens -= 1
 				farmers -= 1
-				print("farmer killed")
+				#print("farmer killed")
 			
 		1:
 			if farmers == 0:
 				citizens -= 1
-				print("citizen killed")
+				#print("citizen killed")
 				
 			else:
 				citizens -= 1
 				farmers -= 1
-				print("farmer killed")
+				#print("farmer killed")
 	
 	#print(float(kill_type) * (float(citizens_const) / float(citizens)))
 	%Player.change_characteristics(0, 3.5)
@@ -169,9 +177,10 @@ func kill_citizen(kill_type : KILL_TYPE, citizen_type = -1):
 		%Player.main_node.current_village_state = 2
 	
 	
-	print("current panic = ", current_panic)
-	print("citizens left = ", citizens, "; farmers of them = ", farmers)
+	#print("current panic = ", current_panic)
+	#print("citizens left = ", citizens, "; farmers of them = ", farmers)
 	
+	on_stat_change.emit(citizens, current_panic, farmers, food, buildings, buildings_size)
 	
 	if citizens <= 0 and not ending_level:
 		ending_level = true

@@ -44,7 +44,8 @@ func _subscribe_gameplay():
 	main_gameplay_node.player_node_ext.on_player_stats_change.connect(player_stats_updated)
 	main_gameplay_node.on_level_end.connect(on_level_end)
 	main_gameplay_node.on_card_hovered.connect(_handler_on_card_hover)
-	main_gameplay_node.on_card_unhovered.connect(_handler_on_card_unhover)	
+	main_gameplay_node.on_card_unhovered.connect(_handler_on_card_unhover)
+	main_gameplay_node.on_village_stats_change.connect(_handle_on_village_stats_change)
 
 func _subscribe_shop():
 	shop_node.on_card_hovered.connect(_handler_on_card_hover)
@@ -255,3 +256,8 @@ func generate_new_nodes(no_shop : bool = false) -> void:
 			i.data.icon = shop_icon
 			i.data.description = "Тут можно навсегда получить карты за души!"
 			i.data.title = "Магазин"
+
+
+
+func _handle_on_village_stats_change(citizens : int, current_panic : float, farmers : int, food : int, buildings : int, buildings_size : int):
+	print(citizens, "  ", current_panic)
