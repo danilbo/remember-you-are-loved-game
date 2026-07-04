@@ -1,7 +1,7 @@
 extends PanelContainer
 class_name UniversalTooltip
 
-@export var widget_data : MapNodeData
+@export var widget_data : TooltipData
 
 
 @onready var icon: TextureRect = $MarginContainer/VBoxContainer/TextureRect
@@ -14,12 +14,11 @@ class_name UniversalTooltip
 func _ready() -> void:
 	set_data(widget_data)
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 	
-func set_data(data: MapNodeData):
+func set_data(data: TooltipData):
 	if data == null:
 		return
 	widget_data = data

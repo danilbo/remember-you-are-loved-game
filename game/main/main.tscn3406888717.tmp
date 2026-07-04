@@ -19,6 +19,9 @@ shop_node = NodePath("Shop")
 metadata/_edit_horizontal_guides_ = [-14237676.0]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1219891613]
+follow_viewport_enabled = true
+
+[node name="HudWidget" parent="CanvasLayer" unique_id=1154191608 instance=ExtResource("4_dsy3x")]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=305870142]
 material = SubResource("ShaderMaterial_5520f")
@@ -30,14 +33,6 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="HudWidget" parent="CanvasLayer" unique_id=1154191608 instance=ExtResource("4_dsy3x")]
-
-[node name="Control" type="Control" parent="CanvasLayer" unique_id=206381221]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="Root" parent="." unique_id=2078141277 node_paths=PackedStringArray("shop_node") instance=ExtResource("5_tkdpa")]
 visible = false
 position = Vector2(960, 540)
@@ -48,4 +43,3 @@ visible = false
 main_gameplay_node = NodePath("../Root")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=469307742]
-position = Vector2(960, 540)

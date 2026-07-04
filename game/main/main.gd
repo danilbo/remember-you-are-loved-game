@@ -7,6 +7,7 @@ const TOOLTIP_SCENE = preload("res://game/ui/universal_tooltip/universal_tooltip
 @export var shop_node : Node2D
 
 @onready var hud_widget: HudWidget = $CanvasLayer/HudWidget
+@onready var camera : Camera2D = $Camera2D
 
 var shop_chance : int = 100
 var selected_dot_type : MapNode.DOT_TYPES
@@ -36,11 +37,15 @@ func _ready() -> void:
 	shop_node.on_card_unhovered.connect(_handler_on_card_unhover)
 	shop_node.on_shop_closing.connect(_handle_on_shop_close)
 
+func do_test():
+	map_manager.global_position.x -= 100
+
 func _process(delta: float) -> void:
 	if universal_tooltip and universal_tooltip.visible:
 		update_tooltip_position()
 	if Input.is_action_just_pressed("DebugAction"):
 		hud_widget.set_value(&"mana", hud_widget.mana_value + 10)
+		do_test()
 
 func spawn_map_manager():
 	if map_manager:
@@ -65,7 +70,7 @@ func set_hud_max_value(stat_name: StringName, value: float) -> void:
 func _handle_node_hovered(data : MapNodeData):
 	if !data:
 		return
-	universal_tooltip.set_data(data)
+	universal_tooltip.set_data(data.get_tooltip_data())
 	universal_tooltip.visible = true
 
 func _handle_node_unhovered():
@@ -176,7 +181,7 @@ func on_level_end() -> void:
 	
 	
 func _handler_on_card_hover(icon : Texture2D, res_name : String, desc : String):
-	var data : MapNodeData = MapNodeData.new()
+	var data : TooltipData = TooltipData.new()
 	
 	data.description = desc
 	data.icon = icon

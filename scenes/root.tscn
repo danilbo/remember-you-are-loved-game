@@ -258,8 +258,6 @@ offset_right = 54.0
 offset_bottom = -374.0
 text = "new turn  lol"
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=530333858]
-
 [connection signal="gui_input" from="Card_graph_content" to="Card_graph_content" method="_on_gui_input"]
 [connection signal="mouse_entered" from="Card_graph_content" to="Card_graph_content" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Card_graph_content" to="Card_graph_content" method="_on_mouse_exited"]

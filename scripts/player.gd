@@ -408,6 +408,7 @@ func die(ending : int):
 			return
 	
 	dead = true
+#	Хэнлить смерть ЗДЕСЬ
 	#main_node.end_level()
 
 
