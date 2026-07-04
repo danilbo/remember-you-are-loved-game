@@ -15,6 +15,7 @@ const TOOLTIP_SCENE = preload("res://game/ui/universal_tooltip/universal_tooltip
 @onready var hud_widget: HudWidget = $CanvasLayer/HudWidget
 @onready var camera : Camera2D = $Camera2D
 @onready var village_widget:= $CanvasLayer/VillageWidget
+@onready var event_widget:= $CanvasLayer/EventWindow
 
 var shop_chance : int = 100
 var selected_dot_type : MapNode.DOT_TYPES
@@ -199,10 +200,14 @@ func _handle_screen_overflow():
 func _handle_player_death():
 	await do_change_screen_logic(false)
 	show_event_window()
+#	add death logic
 	do_change_screen_logic(true)
 
 func show_event_window():
-	pass
+	event_widget.visible = true
+	
+func hide_event_window():
+	event_widget.visible = false
 
 func on_level_end() -> void:
 	await do_change_screen_logic(false)

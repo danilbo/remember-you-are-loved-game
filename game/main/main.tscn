@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cn2due6g2h7cj" path="res://scenes/root.tscn" id="5_tkdpa"]
 [ext_resource type="PackedScene" uid="uid://6w6hr2d4mgia" path="res://scenes/shop.tscn" id="6_yymkh"]
 [ext_resource type="Texture2D" uid="uid://45365gcs28kc" path="res://sprites/IMG_3509.PNG" id="7_7q7ho"]
+[ext_resource type="PackedScene" uid="uid://b2y0iwn4qyold" path="res://game/ui/event_window/event_window.tscn" id="7_g7cwu"]
 [ext_resource type="AudioStream" uid="uid://cq8y1yc4drled" path="res://game/assets/sounds/music/GaymeMain2.ogg" id="7_sifka"]
 [ext_resource type="Texture2D" uid="uid://bda2q10uc1wo6" path="res://sprites/IMG_3508.PNG" id="8_els08"]
 [ext_resource type="Texture2D" uid="uid://bmtxtnb5hvgy5" path="res://sprites/IMG_3507.PNG" id="9_6idrh"]
@@ -37,6 +38,9 @@ metadata/_edit_horizontal_guides_ = [-14237676.0]
 visible = false
 
 [node name="HudWidget" parent="CanvasLayer" unique_id=1154191608 instance=ExtResource("4_dsy3x")]
+
+[node name="EventWindow" parent="CanvasLayer" unique_id=433618870 instance=ExtResource("7_g7cwu")]
+visible = false
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=206381221]
 layout_mode = 3
