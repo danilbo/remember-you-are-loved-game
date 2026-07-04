@@ -4,6 +4,8 @@ var current_level : int = 1
 
 var current_turn : int = 1
 
+var ending : int = -1
+
 var music_volume: float = 0.5:
 	set(value):
 		music_volume = clamp(value, 0.0, 1.0)

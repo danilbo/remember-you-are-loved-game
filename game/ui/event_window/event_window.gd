@@ -38,6 +38,7 @@ func _ready():
 	btn.pressed.connect(_on_continue_pressed)
 
 func _on_continue_pressed():
-	print("Continue button pressed!")
-	# hide()  # Hide the window if you want it to persist
+	if GlobalVariables.ending != -1:
+		get_tree().quit()
+		
 	queue_free() # Destroy the window if you don't need it anymore

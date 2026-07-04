@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://70vt0f4c546l"]
 
 [ext_resource type="Script" uid="uid://bge5lcmdnbrg2" path="res://game/main/main.gd" id="1_5520f"]
+[ext_resource type="Texture2D" uid="uid://8pgjjfes48do" path="res://sprites/event/IMG_3536.PNG" id="2_0hvxd"]
 [ext_resource type="Texture2D" uid="uid://bycuy3d7gnb6d" path="res://sprites/палаточныйлагерь.png" id="2_0j5er"]
 [ext_resource type="Shader" uid="uid://b2311g43c6gx6" path="res://game/main/screen_fadeout_shader.gdshader" id="2_psm6y"]
 [ext_resource type="Texture2D" uid="uid://c8m2k7fjsjraa" path="res://sprites/деревня.png" id="3_2v5lu"]
+[ext_resource type="Texture2D" uid="uid://e32j1pwwdrhl" path="res://sprites/event/IMG_3534.PNG" id="3_lw3xc"]
 [ext_resource type="Texture2D" uid="uid://cirht3wr1hxnh" path="res://game/assets/noises/shader_noise_image.jpg" id="3_yil3p"]
+[ext_resource type="Texture2D" uid="uid://clqy1kolk3cx6" path="res://sprites/event/IMG_3538.PNG" id="4_0d1l5"]
 [ext_resource type="PackedScene" uid="uid://c7x80rdqfeh2s" path="res://game/ui/hud/hud_widget.tscn" id="4_dsy3x"]
 [ext_resource type="Texture2D" uid="uid://thvvhsoif5ij" path="res://sprites/магаз.png" id="4_g7cwu"]
 [ext_resource type="PackedScene" uid="uid://cemby01toyhng" path="res://game/ui/village_widget/village_widget.tscn" id="5_kk62w"]
@@ -24,6 +27,7 @@ shader_parameter/progress = 1.0
 
 [node name="Main" type="Node2D" unique_id=581666908 node_paths=PackedStringArray("main_gameplay_node", "shop_node", "bg_sprite")]
 script = ExtResource("1_5520f")
+ending_incons_list = Array[Texture2D]([ExtResource("2_0hvxd"), ExtResource("3_lw3xc"), ExtResource("3_lw3xc"), ExtResource("4_0d1l5")])
 camp_icon = ExtResource("2_0j5er")
 village_icon = ExtResource("3_2v5lu")
 shop_icon = ExtResource("4_g7cwu")

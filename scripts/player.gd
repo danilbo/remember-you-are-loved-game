@@ -410,6 +410,7 @@ func die(ending : int):
 			change_characteristics(0, 0, 100, -35, 10)
 			return
 	
+	GlobalVariables.ending = ending
 	dead = true
 	on_player_death.emit()
 

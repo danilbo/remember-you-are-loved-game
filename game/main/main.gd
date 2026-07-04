@@ -3,6 +3,8 @@ extends Node2D
 const MAP_MANAGER_SCENE = preload("res://game/map/map_manager/map_manager.tscn")
 const TOOLTIP_SCENE = preload("res://game/ui/universal_tooltip/universal_tooltip.tscn")
 
+@export var ending_incons_list : Array[Texture2D]
+
 @export var camp_icon : Texture
 @export var village_icon : Texture
 @export var shop_icon : Texture
@@ -200,6 +202,29 @@ func _handle_screen_overflow():
 func _handle_player_death():
 	await do_change_screen_logic(false)
 	show_event_window()
+	match GlobalVariables.ending:
+		0:
+			#event_widget.image_texture(ending_incons_list[0])
+			event_widget.set_title("Смерть от урона")
+			event_widget.set_description("Плоть слаба, и ты выяснил это на своей шкуре.")
+			
+		1:
+			event_widget.set_image(ending_incons_list[1])
+			event_widget.set_title("Смерть от потери контроля")
+			event_widget.set_description("Зачем ты сказал им? Ты перестал верить? Как они убедили тебя сделать это с собой?")
+			
+		2:
+			event_widget.set_image(ending_incons_list[1])
+			event_widget.set_title("Смерть от казни")
+			event_widget.set_description("Они добрались до тебя. Это будет тебе уроком. Мы встретимся позже и ты будешь аккуратнее.")
+			
+			
+		3:
+			event_widget.set_image(ending_incons_list[2])
+			event_widget.title_label.text = "Смерть от истощения"
+			event_widget.set_description("Время - твой главный враг и союзник, но на данном этапе эта мудрость уже не важна.")
+	
+	hud_widget.show()
 #	add death logic
 	do_change_screen_logic(true)
 
@@ -277,8 +302,10 @@ func generate_new_nodes(no_shop : bool = false) -> void:
 
 
 
-func _handle_on_village_stats_change(citizens : int, current_panic : float, farmers : int, food : int, buildings : int, buildings_size : int):
-	print(citizens, "  ", current_panic)
+func _handle_on_village_stats_change(citizens : int, current_panic : float, 
+			farmers : int, food : int, buildings : int, buildings_size : int):
+	$CanvasLayer/VillageWidget.update_data(citizens, current_panic,farmers,
+	food, buildings, buildings_size)
 
 
 func _handle_on_popup_event(icon : Texture, pop_name : String, pop_desc : String, is_tutorial : bool):
