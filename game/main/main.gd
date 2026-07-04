@@ -49,6 +49,7 @@ func _subscribe_gameplay():
 	main_gameplay_node.on_card_hovered.connect(_handler_on_card_hover)
 	main_gameplay_node.on_card_unhovered.connect(_handler_on_card_unhover)
 	main_gameplay_node.on_village_stats_change.connect(_handle_on_village_stats_change)
+	main_gameplay_node.trigger_popup_event.connect(_handle_on_popup_event)
 
 func _subscribe_shop():
 	shop_node.on_card_hovered.connect(_handler_on_card_hover)
@@ -270,3 +271,7 @@ func generate_new_nodes(no_shop : bool = false) -> void:
 
 func _handle_on_village_stats_change(citizens : int, current_panic : float, farmers : int, food : int, buildings : int, buildings_size : int):
 	print(citizens, "  ", current_panic)
+
+
+func _handle_on_popup_event(icon : Texture, pop_name : String, pop_desc : String, is_tutorial : bool):
+	pass

@@ -35,6 +35,7 @@ signal on_level_end()
 
 signal on_card_hovered(icon : Texture2D, res_name : String, desc : String)
 signal on_card_unhovered()
+signal trigger_popup_event(icon : Texture, pop_name : String, pop_desc : String, is_tutorial : bool)
 
 var card_array : Array[Card] = []
 
