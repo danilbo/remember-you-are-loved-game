@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://bsg6c0pxyhe7o"]
+
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="1_otx5l"]
+[ext_resource type="Texture2D" uid="uid://m4vjw3sj4wu" path="res://sprites/IMG_3422.PNG" id="1_r45nn"]
+
+[resource]
+script = ExtResource("1_otx5l")
+risk_level = 2
+type = 1
+name = "Ритуальное убийство"
+energy = -15.0
+control = -30.0
+mana = 40.0
+kills = 1
+kill_type = 50
+icon = ExtResource("1_r45nn")

@@ -1,7 +1,7 @@
 extends Node2D
 class_name MapNode 
 
-enum DOT_TYPES{SHOP, LEVEL}
+enum DOT_TYPES{LEVEL, SHOP}
 
 @export var data: MapNodeData
 @export var title: String = ""
@@ -18,6 +18,7 @@ enum DOT_TYPES{SHOP, LEVEL}
 @export var outline_draw_time: float = 0.45
 @export var outline_wobble: float = 4.0
 @export var dot_type : DOT_TYPES
+@export var village_resource : Village_resourse = Village_resourse.new()
 
 @onready var area_2d: Area2D = $Area2D
 @onready var collision_shape_2d: CollisionShape2D = $Area2D/CollisionShape2D

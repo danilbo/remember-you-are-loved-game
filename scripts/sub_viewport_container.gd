@@ -75,6 +75,8 @@ var rotation_def : Vector2 = Vector2.ZERO
 var termination_seq : bool = false
 var termination_ticks : int = 0
 
+var in_shop : bool = false
+
 signal on_hovered(icon : Texture2D, res_name : String, desc : String)
 signal on_unhovered()
 
@@ -192,6 +194,9 @@ func _process(_delta: float) -> void:
 						match logical_res.casting_type:
 							logical_res.CASTING_TYPES.INSTANT:
 								new_pos = player_node.graveyard
+								if logical_res.name == "Еда":
+									new_pos -= Vector2(400,-400)
+									
 								logical_res.position = logical_res.POSITIONS.GRAVE
 								
 							logical_res.CASTING_TYPES.BUFF:
@@ -265,25 +270,84 @@ func play() -> void:
 
 func _on_mouse_entered() -> void:
 	if not mouse_on:
-		if logical_res != null:
-			on_hovered.emit(logical_res.icon, logical_res.name, logical_res.desctiption)
+		if logical_res != null and not logical_res.position == logical_res.POSITIONS.GRAVE:
+			if not in_shop:
+				on_hovered.emit(logical_res.icon, logical_res.name, logical_res.desctiption)
+			
+			else:
+				on_hovered.emit(logical_res.icon, logical_res.name + " (" + str(logical_res.base_cost) + ")", logical_res.desctiption)
+				
 		mouse_on = true
 
 
 func _on_mouse_exited() -> void:
 	if mouse_on:
-		if logical_res != null:
+		if logical_res != null and not logical_res.position == logical_res.POSITIONS.GRAVE:
 			on_unhovered.emit()
 		mouse_on = false
 
 
 func get_correct_mouse_delta() -> Vector2:
-	return get_viewport().get_mouse_position() - (get_viewport_rect().size / 2.) - position - ((size * scale) / 2.)
+	if not in_shop:
+		return get_viewport().get_mouse_position() - (get_viewport_rect().size / 2.) - position - ((size * scale) / 2.)
+		
+	else:
+		return get_viewport().get_mouse_position()- position - ((size * scale) / 2.)
 
 
 func _on_gui_input(event: InputEvent) -> void:
 	if not disable_logic:
-		if event.is_action_pressed("lmb") and not pulse_loops > 0 and not non_playable and player_node.mana + logical_res.mana >= 0. and player_node.energy + logical_res.energy >= 0. and player_node.can_play_cards:
+		if event.is_action_pressed("lmb") and in_shop and player_node.souls >= logical_res.base_cost:
+			player_node.souls -= logical_res.base_cost
+			player_node.change_characteristics()
+			
+			for i : Card in get_parent().card_array:
+				for j in get_parent().shop_container.linked_nodes:
+					if j[0] == self:
+						get_parent().shop_container.remove_element_at_index(j[1])
+						break
+						
+			
+			#print(get_parent().shop_container.linked_nodes)
+			player_node.deck.append(logical_res.duplicate())
+			new_pos = Vector2(1800, 1100)
+			get_parent().card_array.erase(self)
+			termination_seq = true
+			termination_ticks = 20
+		
+		if event.is_action_pressed("lmb") and not in_shop and not player_node.dead and player_node.village.citizens > 0 and player_node.main_node.check_animations() and not pulse_loops > 0 and not non_playable and player_node.mana + logical_res.mana >= 0. and player_node.energy + logical_res.energy >= 0. and player_node.can_play_cards:
+			if logical_res.name == "Овладеть паникой" and player_node.village.current_panic < 50:
+				return
+				
+			if logical_res.casting_type == logical_res.CASTING_TYPES.BUFF and len(player_node.buff_card_place1.linked_nodes) >= player_node.buff_card_place1.grid_limits.x * player_node.buff_card_place1.grid_limits.y:
+				return
+				
+			if logical_res.type == logical_res.TYPES.HERO:
+				var chance : int = randi_range(0, 100)
+				print(chance, "%")
+				
+				if player_node.control <= 33:
+					if logical_res.risk_level == logical_res.RISK_LEVEL.HIGH:
+						if chance <= 90:
+							logical_res.animation_loop.clear()
+							logical_res.animation_loop.append([player_node.do_special_trigger, ["selfharm"]])
+							
+					if logical_res.risk_level == logical_res.RISK_LEVEL.MEDIUM:
+						if chance <= 50:
+							logical_res.animation_loop.clear()
+							logical_res.animation_loop.append([player_node.do_special_trigger, ["selfharm"]])
+				
+				elif player_node.control <= 66:
+					if logical_res.risk_level == logical_res.RISK_LEVEL.HIGH:
+						if chance <= 50:
+							logical_res.animation_loop.clear()
+							logical_res.animation_loop.append([player_node.do_special_trigger, ["selfharm"]])
+							
+					if logical_res.risk_level == logical_res.RISK_LEVEL.MEDIUM:
+						if chance <= 10:
+							logical_res.animation_loop.clear()
+							logical_res.animation_loop.append([player_node.do_special_trigger, ["selfharm"]])
+			
 			for i in player_node.hand_box_container.linked_nodes:
 				if i[0] == self:
 					player_node.hand_box_container.remove_element_at_index(i[1])

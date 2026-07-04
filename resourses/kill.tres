@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://n0gh2a0ff52r"]
+
+[ext_resource type="Texture2D" uid="uid://bwev37dicf5yv" path="res://sprites/IMG_3420.PNG" id="1_8xp5c"]
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="1_j7uoq"]
+
+[resource]
+script = ExtResource("1_j7uoq")
+risk_level = 2
+type = 1
+name = "Убийство"
+energy = -10.0
+control = -15.0
+kills = 1
+kill_type = 20
+icon = ExtResource("1_8xp5c")

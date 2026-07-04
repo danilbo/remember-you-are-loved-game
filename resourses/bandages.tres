@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://cdjytx5abdj02"]
+
+[ext_resource type="Texture2D" uid="uid://dvx24e30ev0c3" path="res://sprites/IMG_3447.PNG" id="1_0o8tt"]
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="2_rrbhy"]
+
+[resource]
+script = ExtResource("2_rrbhy")
+type = 2
+name = "Бинты"
+hp = 10.0
+icon = ExtResource("1_0o8tt")

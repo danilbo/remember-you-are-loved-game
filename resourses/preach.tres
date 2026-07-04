@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://d2w2555k2q1wt"]
+
+[ext_resource type="Texture2D" uid="uid://6e6kl2hb7xbh" path="res://sprites/IMG_3425.PNG" id="1_wctc4"]
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="2_7fyma"]
+
+[resource]
+script = ExtResource("2_7fyma")
+risk_level = 2
+type = 1
+name = "Проповедовать"
+energy = 15.0
+control = 5.0
+mana = 10.0
+panic = 8.0
+special_triggers = ["hp_random"]
+icon = ExtResource("1_wctc4")

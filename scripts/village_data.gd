@@ -1,5 +1,7 @@
 extends Node
 
+class_name Village
+
 enum VILLAGE_TYPE{CAMP, VILLAGE, CASTLE}
 enum KILL_TYPE{ENVIRONMENT = 1, ACCIDENT = 3, SILENT_KILL = 10, KNOWN_KILL = 20, RITUALISTIC_KILL = 50, IGNORE = 0}
 
@@ -8,7 +10,7 @@ enum KILL_TYPE{ENVIRONMENT = 1, ACCIDENT = 3, SILENT_KILL = 10, KNOWN_KILL = 20,
 
 @export_subgroup("Citizens and their stats")
 @export var citizens : int
-var current_panic : float #from 0 to 100
+var current_panic : float = 0 #from 0 to 100
 
 @export_subgroup("Food and mults")
 @export var farmers : int #not an additional citizens but how many of them
@@ -22,13 +24,31 @@ var current_panic : float #from 0 to 100
 
 var citizens_const : int = citizens
 var kill_on_that_turn : bool = false
+var unscheduled_dayoff : bool = false
+var confused : bool = false
 
+func _ready() -> void:
+	generate(1)
+
+func load_from_res(resource : Village_resourse):
+	type = int(resource.type)
+	citizens = resource.citizens
+	farmers = resource.farmers
+	food = resource.food
+	food_gain_eff = resource.food_gain_eff
+	buildings = resource.buildings
+	buildings_size = resource.buildings_size
+	citizens_const = citizens
+	current_panic = 0
+	kill_on_that_turn = false
+	unscheduled_dayoff = false
+	confused = false
 
 func generate(level : int):
 	current_panic = 0.
 	match type:
 		VILLAGE_TYPE.CAMP:
-			citizens = randi_range(3 * level, (3 * level) + (level * 2))
+			citizens = randi_range(2.5 * level, (2.5 * level) + (level * 2))
 			citizens_const = citizens
 			buildings_size = randi_range(2, 6)
 			buildings = (citizens / buildings_size) + randi_range(1,3)
@@ -62,7 +82,16 @@ func generate(level : int):
 	
 	
 func tick():
+	if current_panic >= 75 and citizens > 2:
+		var chance1 : int = randi_range(0,100)
+		if chance1 <= (current_panic - 75) * 4:
+			%Player.die(2)
+			return
+	
 	food -= citizens
+	
+	if confused:
+		confused = false
 	
 	if food < -1:
 		for i in range(0, abs(food / 2)):
@@ -71,7 +100,11 @@ func tick():
 			
 	print("food left before harvest = ", food)
 	
-	food += float(farmers) * food_gain_eff
+	if not unscheduled_dayoff:
+		food += float(farmers) * food_gain_eff
+		
+	else:
+		unscheduled_dayoff = false
 	
 	print("food left after harvest = ", food)
 	
@@ -116,11 +149,31 @@ func kill_citizen(kill_type : KILL_TYPE, citizen_type = -1):
 				print("farmer killed")
 	
 	#print(float(kill_type) * (float(citizens_const) / float(citizens)))
+	%Player.change_characteristics(0, 2.)
+	%Player.obtain_soul()
+	
 	if citizens != 0:
-		current_panic += (float(kill_type) * ((float(citizens_const) / float(citizens)))) / clampf(float(current_level) / 8., 1., 9999999.)
+		if not confused:
+			current_panic += ( float(kill_type) * clampf( (float(citizens_const) / float(citizens) ), 0., 2.5) ) / clampf(float(current_level) / 5., 1., 9999999.)
+		
+		else:
+			current_panic -= ( float(kill_type) * clampf( (float(citizens_const) / float(citizens) ), 0., 2.5) ) / clampf(float(current_level) / 5., 1., 9999999.)
+		
+	print(citizens, " || ", int(citizens_const / 3), " || ", int(citizens - (citizens_const / 3)))
+	if citizens <= clampi(int(citizens_const / 3), 1, 99999):
+		%Player.main_node.current_village_state = 3
+	
+	elif citizens <= int(citizens_const - (citizens_const / 3)):
+		%Player.main_node.current_village_state = 2
+	
 	
 	print("current panic = ", current_panic)
 	print("citizens left = ", citizens, "; farmers of them = ", farmers)
+	
+	
+	if citizens <= 0:
+		await get_tree().create_timer(0.5).timeout
+		%Player.main_node.end_level()
 
 func demolish_building(kill_type : KILL_TYPE):
 	for i in range(0, buildings_size):

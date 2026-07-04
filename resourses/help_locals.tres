@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://dpsjsnwroe07t"]
+
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="1_n3qlb"]
+[ext_resource type="Texture2D" uid="uid://p3uyf7g22f17" path="res://sprites/IMG_3437.PNG" id="1_yfmpd"]
+
+[resource]
+script = ExtResource("1_n3qlb")
+type = 1
+name = "Помочь местным"
+energy = -15.0
+control = 5.0
+panic = -5.0
+icon = ExtResource("1_yfmpd")

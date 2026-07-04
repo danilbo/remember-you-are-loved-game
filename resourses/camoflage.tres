@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://cuuc4rtnldnvs"]
+
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="1_pjs7k"]
+[ext_resource type="Texture2D" uid="uid://d324w2o8edmnn" path="res://sprites/IMG_3448.PNG" id="1_s184w"]
+
+[resource]
+script = ExtResource("1_pjs7k")
+type = 2
+casting_type = 1
+name = "Маскировка"
+duration = 9999
+has_special_trigger = true
+icon = ExtResource("1_s184w")

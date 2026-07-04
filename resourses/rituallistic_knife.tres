@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://bvyw10x6mbnwu"]
+
+[ext_resource type="Texture2D" uid="uid://bvagacbaiksve" path="res://sprites/IMG_3451.PNG" id="1_1ltiv"]
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="2_olq8d"]
+
+[resource]
+script = ExtResource("2_olq8d")
+type = 2
+casting_type = 1
+name = "Ритуальный нож"
+duration = 9999
+has_special_trigger = true
+icon = ExtResource("1_1ltiv")

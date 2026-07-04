@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://ga2u2d041g7t"]
+
+[ext_resource type="Texture2D" uid="uid://be7bfefdlrw" path="res://sprites/IMG_3436.PNG" id="1_fxngx"]
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="2_q55b5"]
+
+[resource]
+script = ExtResource("2_q55b5")
+risk_level = 2
+type = 1
+name = "Овладеть паникой"
+energy = -20.0
+control = -10.0
+kills = 3
+kill_type = 3
+icon = ExtResource("1_fxngx")

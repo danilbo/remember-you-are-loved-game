@@ -4,9 +4,13 @@ const MAP_MANAGER_SCENE = preload("res://game/map/map_manager/map_manager.tscn")
 const TOOLTIP_SCENE = preload("res://game/ui/universal_tooltip/universal_tooltip.tscn")
 
 @export var main_gameplay_node : RootNode
+@export var shop_node : Node2D
 
 @onready var hud_widget: HudWidget = $CanvasLayer/HudWidget
 
+var shop_chance : int = 50
+var selected_dot_type : MapNode.DOT_TYPES
+var selected_village_resource : Village_resourse
 var temp_node_list : Array[MapNode] = []
 var universal_tooltip : UniversalTooltip
 var map_manager : MapManager
@@ -14,14 +18,23 @@ var _screen_change_tween: Tween
 
 func _ready() -> void:
 	#hud_widget.set_visible(false)
-	player_stats_updated(100., 100., 100., 100.)
+	player_stats_updated(100., 100., 100., 100., 0)
 	spawn_universal_tooltip()
 	spawn_map_manager()
-	map_manager.spawn_next_nodes(3)
+	var new_node = map_manager.spawn_next_nodes(1)
+	map_manager.gameplay_node_selected.connect(_handle_gameplay_select)
+	new_node[0].village_resource.generate(GlobalVariables.current_level)
+	new_node[0].data.description = new_node[0].village_resource.get_desc()
+	new_node[0].data.title = new_node[0].village_resource.get_village_name()
+	
 	main_gameplay_node.player_node_ext.on_player_stats_change.connect(player_stats_updated)
 	main_gameplay_node.on_level_end.connect(on_level_end)
 	main_gameplay_node.on_card_hovered.connect(_handler_on_card_hover)
 	main_gameplay_node.on_card_unhovered.connect(_handler_on_card_unhover)
+	
+	shop_node.on_card_hovered.connect(_handler_on_card_hover)
+	shop_node.on_card_unhovered.connect(_handler_on_card_unhover)
+	shop_node.on_shop_closing.connect(_handle_on_shop_close)
 
 func _process(delta: float) -> void:
 	if universal_tooltip and universal_tooltip.visible:
@@ -117,12 +130,20 @@ func _handle_screen_change_requested(show: bool, request_id: int) -> void:
 
 func on_fade_change(show : bool, request_id : int):
 	if not show:
-		main_gameplay_node.show()
-		map_manager.hide()
+		if selected_dot_type == MapNode.DOT_TYPES.LEVEL:
+			main_gameplay_node.show()
+			map_manager.hide()
+			main_gameplay_node.player_node_ext.new_turn()
+			
+		else:
+			map_manager.hide()
+			shop_node.show()
+			shop_node.create_shop(13)
+			shop_node.shop_close_in_progress = false
 			
 
 
-func player_stats_updated(hp : float, energy : float, control : float, mana : float):
+func player_stats_updated(hp : float, energy : float, control : float, mana : float, souls : int):
 	if mana != hud_widget.mana_value:
 		hud_widget.set_mana_value(mana)
 		
@@ -134,7 +155,16 @@ func player_stats_updated(hp : float, energy : float, control : float, mana : fl
 		
 	if control != hud_widget.control_value:
 		hud_widget.set_control_value(control)
+		
+	hud_widget.set_soul_value(souls)
 
+
+func _handle_on_shop_close() -> void:
+	await do_change_screen_logic(false)
+	shop_node.hide()
+	map_manager.show()
+	do_change_screen_logic(true)
+	generate_new_nodes(true)
 
 
 func on_level_end() -> void:
@@ -142,8 +172,7 @@ func on_level_end() -> void:
 	main_gameplay_node.hide()
 	map_manager.show()
 	do_change_screen_logic(true)
-	var new_nodes = map_manager.spawn_next_nodes(3)
-	#print(new_nodes)
+	generate_new_nodes()
 	
 	
 func _handler_on_card_hover(icon : Texture2D, res_name : String, desc : String):
@@ -160,3 +189,38 @@ func _handler_on_card_hover(icon : Texture2D, res_name : String, desc : String):
 	
 func _handler_on_card_unhover():
 	universal_tooltip.visible = false
+
+
+func _handle_gameplay_select(node : MapNode):
+	selected_dot_type = node.dot_type
+	if node.dot_type == node.DOT_TYPES.LEVEL:
+		main_gameplay_node.player_node_ext.village.load_from_res(node.village_resource)
+
+
+func generate_new_nodes(no_shop : bool = false) -> void:
+	var new_nodes : Array[MapNode] = map_manager.spawn_next_nodes(3)
+	
+	if GlobalVariables.current_level > 2:
+		if not no_shop:
+			var chance : int = randi_range(0, 100)
+			print(chance,"%")
+			if chance <= shop_chance:
+				new_nodes.pick_random().dot_type = MapNode.DOT_TYPES.SHOP
+				shop_chance = 50
+				
+			else:
+				shop_chance += 25
+			
+	for i in new_nodes:
+		if i.dot_type != MapNode.DOT_TYPES.SHOP:
+			if GlobalVariables.current_level > 7:
+				i.village_resource.type = Village_resourse.VILLAGE_TYPE.VILLAGE
+			
+			i.village_resource.generate(GlobalVariables.current_level)
+			i.data.description = i.village_resource.get_desc()
+			i.data.title = i.village_resource.get_village_name()
+			
+		
+		else:
+			i.data.description = "Тут можно навсегда получить карты за души!"
+			i.data.title = "Магазин"

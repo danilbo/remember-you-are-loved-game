@@ -8,6 +8,7 @@ signal on_any_node_hovered(data : MapNodeData)
 signal on_any_node_unhovered()
 signal screen_change_requested(show: bool, request_id: int)
 signal screen_change_finished(request_id: int)
+signal gameplay_node_selected(node : MapNode)
 
 var data_paths: Array[String] = [
 	"res://game/resources/default_map_node.tres",
@@ -106,6 +107,8 @@ func spawn_map_node(position: Vector2) -> MapNode:
 	return node
 
 func _handle_node_click(node: MapNode):
+	gameplay_node_selected.emit(node)
+	
 	if _is_transitioning:
 		return
 	_is_transitioning = true

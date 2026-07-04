@@ -7,7 +7,8 @@ class_name Player
 @export var energy : float = 100.
 @export var control : float = 100.
 @export var mana : float = 100.
-@export var hand_size : int = 1 #max = 8
+@export var hand_size : int = 8 #max = 8
+@export var souls : int = 0
 
 @export_subgroup("Node Links")
 @export var hand_box_container : Node2D
@@ -15,11 +16,12 @@ class_name Player
 @export var village : Node
 @export var graveyard : Vector2
 @export var deck_card_node : Card
-@export var main_node : Node2D
+@export var main_node : RootNode
 
-signal on_player_stats_change(hp : float, energy : float, control : float, mana : float)
+signal on_player_stats_change(hp : float, energy : float, control : float, mana : float, souls : int)
 
-var deck : Array[Logical_card] = [preload("res://resourses/shelter.tres").duplicate(), preload("res://resourses/godfist_save.tres").duplicate(), preload("res://resourses/panic_reduce.tres").duplicate(), preload("res://resourses/unscheduled_dayoff.tres").duplicate(), preload("res://resourses/clear_weather.tres").duplicate(), preload("res://resourses/lightning_bolt.tres").duplicate(), preload("res://resourses/storm.tres").duplicate()]#, preload("res://resourses/godlike_healing.tres").duplicate(), preload("res://resourses/godlike_healing.tres").duplicate()]
+#var deck : Array[Logical_card] = [preload("res://resourses/steal_the_food.tres"), preload("res://resourses/food.tres").duplicate(),preload("res://resourses/beg_for_food.tres").duplicate(), preload("res://resourses/destroy_barn.tres").duplicate(), preload("res://resourses/master_the_panic.tres").duplicate(), preload("res://resourses/mulligan.tres"), preload("res://resourses/tornado.tres"), preload("res://resourses/amnezia.tres"), preload("res://resourses/memory_wipe.tres"), preload("res://resourses/confusion.tres"), preload("res://resourses/communicate.tres"), preload("res://resourses/rituallistic_kill.tres"), preload("res://resourses/kill.tres").duplicate(), preload("res://resourses/knife.tres").duplicate(), preload("res://resourses/campfire.tres").duplicate(), preload("res://resourses/shelter.tres").duplicate(), preload("res://resourses/godfist_save.tres").duplicate(), preload("res://resourses/panic_reduce.tres").duplicate(), preload("res://resourses/unscheduled_dayoff.tres").duplicate(), preload("res://resourses/clear_weather.tres").duplicate(), preload("res://resourses/lightning_bolt.tres").duplicate(), preload("res://resourses/storm.tres").duplicate()]#, preload("res://resourses/godlike_healing.tres").duplicate(), preload("res://resourses/godlike_healing.tres").duplicate()]
+var deck : Array[Logical_card] = []
 var current_deck_delta : int = 0
 var can_play_cards = true
 
@@ -28,11 +30,49 @@ var current_card_playing : Card
 var deck_node_show_ticks : int = 0
 var deck_node_show_seq : bool = false
 
+var need_to_draw_cards : bool = true
+var need_to_draw_ticks_const : int = 45
+var need_to_draw_ticks : int = need_to_draw_ticks_const
+
+var need_to_draw_one_ticks_const : int = 5
+var need_to_draw_one_ticks : int = need_to_draw_one_ticks_const
+
+var new_turn_cooldown_const : int = 90
+var new_turn_cooldown : int = new_turn_cooldown_const
+
+var dead : bool = false
+var forever_end : bool = false
+
 func _ready() -> void:
-	on_player_stats_change.emit(hp, energy, control, mana)
-	#print(deck)
+	on_player_stats_change.emit(hp, energy, control, mana, souls)
+	
+	if true:
+		for i in range(0,16):
+			pass
+			deck.append(preload("res://resourses/knife.tres").duplicate())
+			deck.append(preload("res://resourses/kill.tres").duplicate())
+			#deck.append(main_node.shop_node.cards_list.pick_random().duplicate())
 
 func _process(delta: float) -> void:
+	if dead and not forever_end:
+		if main_node.check_animations():
+			main_node.end_level()
+			forever_end = true
+		
+	if new_turn_cooldown > 0:
+		new_turn_cooldown -= 1
+	
+	if main_node.visible and not dead:
+		if need_to_draw_cards and main_node.check_animations():
+			need_to_draw_ticks -= 1
+			if need_to_draw_ticks <= 0:
+				#need_to_draw_cards = false
+				for i in range(0, hand_size):
+					await get_tree().create_timer(0.03).timeout
+					draw_random_card() 
+					
+				need_to_draw_cards = false
+	
 	if not deck_card_node.visible:
 		if deck_node_show_seq:
 			deck_node_show_ticks -= 1
@@ -40,13 +80,26 @@ func _process(delta: float) -> void:
 				deck_card_node.show()
 				deck_node_show_seq = false
 
+
 func change_characteristics(energy_delta : float = 0., mana_delta : float = 0., control_delta : float = 0., panic_delta : float = 0., hp_delta : float = 0.) -> void:
+	if dead:
+		return
+	
 	if panic_delta != 0.:
 		interact_with_village(0, 0, 0, panic_delta)
 	
+	if energy_delta > 0. and item_trigger("Костёр", false):
+		energy_delta *= 2.
+	
+	elif energy_delta < 0. and item_trigger("Стимулятор", false):
+		energy_delta /= 2.
+	
 	energy += energy_delta
 	mana += mana_delta
-	control += control_delta
+	
+	if control_delta != 0. and not item_trigger("Стимулятор", false):
+		control += control_delta
+		
 	hp += hp_delta
 	
 	energy = clampf(energy, 0., 100.)
@@ -54,10 +107,13 @@ func change_characteristics(energy_delta : float = 0., mana_delta : float = 0., 
 	control = clampf(control, 0., 100.)
 	hp = clampf(hp, 0., 100.)
 	
-	on_player_stats_change.emit(hp, energy, control, mana)
+	on_player_stats_change.emit(hp, energy, control, mana, souls)
 	
-	if hp == 0:
-		die()
+	if hp <= 0:
+		die(0)
+		
+	elif control <= 0:
+		die(1)
 	
 	print("energy = ", energy)
 	print("mana = ", mana)
@@ -67,6 +123,69 @@ func change_characteristics(energy_delta : float = 0., mana_delta : float = 0., 
 
 
 func do_special_trigger(args : Array) -> void:
+	if dead:
+		return
+	
+	if "selfharm" in args:
+		change_characteristics(randf_range(-25, -5), 0, randf_range(-5, 8), 0, randf_range(-25, -5))
+	
+	if "steal_food" in args:
+		var chance : int = randi_range(0, 100)
+		print(chance,"%")
+		if chance < 70:
+			main_node.spawn_temp_card(preload("res://resourses/food.tres").duplicate())
+			deck.append(preload("res://resourses/food.tres").duplicate())
+		
+	
+	if "beg_for_food" in args:
+		var chance : int = randi_range(0, 100)
+		print(chance,"%")
+		if chance < 50:
+			change_characteristics(0,0,0,0, [-10, -5].pick_random())
+			
+		else:
+			main_node.spawn_temp_card(preload("res://resourses/food.tres").duplicate())
+			deck.append(preload("res://resourses/food.tres").duplicate())
+	
+	if "burn_the_barn" in args:
+		village.food -= village.food / 5.
+	
+	if "hp_random" in args:
+		change_characteristics(0,0,0,0, [-10, -5, 0].pick_random())
+	
+	if "mulligan" in args:
+		for i : Card in main_node.card_array:
+			if i.logical_res.position == i.logical_res.POSITIONS.HAND:
+				for j in hand_box_container.linked_nodes:
+					if j[0] == i:
+						hand_box_container.remove_element_at_index(j[1])
+						break
+						
+				i.send_to_grave()
+					
+
+		for i in range(0,3):
+			draw_random_card()
+	
+	if "tornado" in args:
+		trigger_on_bad_weather()
+		var chance : int = randi_range(0, 100) 
+		print(chance,"%")
+		if chance < 50:
+			if not item_trigger("Самодельное убежище"):
+				change_characteristics(0, 0, 0, 0, -60)
+				
+			interact_with_village(0, randi_range(1, village.buildings / 2), Village.KILL_TYPE.ENVIRONMENT)
+	
+	if "confusion" in args:
+		village.confused = true
+	
+	if "comm1" in args:
+		change_characteristics(0., 0., [-5., 10].pick_random())
+		
+	if "comm2" in args:
+		interact_with_village(0, 0, 0, [-5., 0, 5].pick_random())
+	
 	if "unscheduled_dayoff" in args:
 		village.unscheduled_dayoff = true
 	
@@ -104,9 +223,36 @@ func draw_random_card() -> void:
 
 
 func interact_with_village(kills : int, demolish_houses : int, kill_type, panic_delta : float = 0.):
+	if dead:
+		return
+	
 	if panic_delta != 0.:
-		village.current_panic += panic_delta
+		if not village.confused:
+			village.current_panic += panic_delta
+			
+		else:
+			village.current_panic += panic_delta
 		village.current_panic = clampf(village.current_panic, 0, 100)
+	
+	if kills > 0:
+		if kill_type == village.KILL_TYPE.SILENT_KILL or kill_type == village.KILL_TYPE.KNOWN_KILL or kill_type == village.KILL_TYPE.RITUALISTIC_KILL:
+			if item_trigger("Нож"):
+				change_characteristics(10)
+				
+			if item_trigger("Ритуальный нож"):
+				change_characteristics(0, 5)
+				
+		if item_trigger("Точечная амнезия"):
+			kill_type = Village.KILL_TYPE.IGNORE
+			
+		elif item_trigger("Маскировка"):
+			kill_type = Village.KILL_TYPE.ACCIDENT
+	
+	
+	if kill_type != Village.KILL_TYPE.IGNORE:
+		if item_trigger("Стирание памяти", false):
+			kill_type = Village.KILL_TYPE.IGNORE
+	
 	
 	for i in range(0, kills):
 		village.kill_citizen(kill_type, -1)
@@ -117,6 +263,16 @@ func interact_with_village(kills : int, demolish_houses : int, kill_type, panic_
 
 
 func new_turn() -> void:
+	if not main_node.check_animations() or need_to_draw_cards or new_turn_cooldown > 0 or dead:
+		return
+	
+	new_turn_cooldown = new_turn_cooldown_const
+	
+	current_deck_delta = 0
+	
+	need_to_draw_cards = true
+	need_to_draw_ticks = need_to_draw_ticks_const
+	
 	var c : int = 0
 	var res_ticks : int = 0
 	var only_passive_deleted : bool = true
@@ -124,7 +280,7 @@ func new_turn() -> void:
 	
 	village.tick()
 	
-	change_characteristics(20, 12)
+	change_characteristics(15, 10, 4)
 	
 	for i : Card in main_node.card_array:
 		#print(i.logical_res.position, i.logical_res.POSITIONS.HAND)
@@ -147,7 +303,9 @@ func new_turn() -> void:
 			i.logical_res.POSITIONS.GRAVE:
 				deletion_indexes.append(main_node.card_array.find(i))
 				
-				i.new_pos = deck_card_node.position
+				if i.logical_res.name != "Еда":
+					i.new_pos = deck_card_node.position
+				
 				i.logical_res.position = i.logical_res.POSITIONS.DECK
 				i.rotation_def.y = 180.
 				i.termination_seq = true
@@ -180,6 +338,8 @@ func new_turn() -> void:
 						i.termination_ticks = 25
 						i.logical_res.time_on_table = 0
 				
+				else:
+					current_deck_delta += 1
 			
 	if not deck_card_node.visible and not deck_node_show_seq and len(deletion_indexes) > 0:
 		if not only_passive_deleted:
@@ -196,8 +356,22 @@ func new_turn() -> void:
 	
 	for i in deletion_indexes:
 		main_node.card_array.remove_at(i)
+	
+	deletion_indexes.clear()
+	
+	for i in deck:
+		if i.name == "Еда" and i.if_food_termination:
+			deletion_indexes.append(deck.find(i))
+			
+			
+	deletion_indexes.sort()
+	deletion_indexes.reverse()
 		
+	for i in deletion_indexes:
+		deck.remove_at(i)
 		
+	
+	deck.shuffle()
 
 func trigger_on_bad_weather() -> void:
 	for i : Card in main_node.card_array:
@@ -221,7 +395,7 @@ func trigger_on_good_weather() -> void:
 			i.send_to_grave()
 
 
-func die():
+func die(ending : int):
 	for i : Card in main_node.card_array:
 		if i.logical_res.name == "Спасение" and i.logical_res.position == i.logical_res.POSITIONS.PASSSIVE:
 			for j in buff_card_place1.linked_nodes:
@@ -230,27 +404,31 @@ func die():
 					break
 					
 			i.send_to_grave()
-			change_characteristics(0, 0, 100, -25, 10)
-			break
+			change_characteristics(0, 0, 100, -35, 10)
+			return
 	
-	if hp <= 0.:
-		pass
+	dead = true
+	#main_node.end_level()
 
 
-func item_trigger(item_name : String) -> bool:
+func item_trigger(item_name : String, delete_item : bool = true) -> bool:
 	for i : Card in main_node.card_array:
 		if i.logical_res.name == item_name and i.logical_res.position == i.logical_res.POSITIONS.PASSSIVE:
-			for j in buff_card_place1.linked_nodes:
-				if j[0] == i:
-					buff_card_place1.remove_element_at_index(j[1])
-					break
-					
-			i.send_to_grave()
+			if delete_item:
+				for j in buff_card_place1.linked_nodes:
+					if j[0] == i:
+						buff_card_place1.remove_element_at_index(j[1])
+						break
+						
+				i.send_to_grave()
 			return true
 			
 	return false
 	
 
+func obtain_soul() -> void:
+	souls += 1
+	on_player_stats_change.emit(hp, energy, control, mana, souls)
 
 func _on_button_pressed() -> void:
 	new_turn()

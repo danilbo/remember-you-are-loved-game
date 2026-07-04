@@ -86,7 +86,7 @@ func repair_indexes(deleted_index : int) -> void:
 					max_index = i[1]
 					
 			for i in linked_nodes:
-				if i[1] == max_index:
+				if i[1] == max_index and max_index > deleted_index - 1:
 					i[1] = deleted_index
 					break
 					
@@ -162,7 +162,7 @@ func repair_indexes(deleted_index : int) -> void:
 func rearrange() -> void:
 	var new_indexes = ArrangeMethods.get_from_center_positions(len(linked_nodes))
 	#print(new_indexes)
-	print(linked_nodes)
+	#print(linked_nodes)
 	for i in linked_nodes:
 		i[0].new_pos = position
 		if pattern != ArrangeMethods.PATTERNS.FROM_CENTER:
@@ -170,3 +170,7 @@ func rearrange() -> void:
 			
 		else:
 			i[0].new_pos.x += float(new_indexes[i[1]].x) * gaps.x
+
+
+func clear() -> void:
+	linked_nodes.clear()

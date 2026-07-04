@@ -1,5 +1,6 @@
 extends Node
 
+var current_level : int = 1
 
 var music_volume: float = 0.5:
 	set(value):

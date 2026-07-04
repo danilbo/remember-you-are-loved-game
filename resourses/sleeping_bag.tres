@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://cqghv22kfwgqh"]
+
+[ext_resource type="Texture2D" uid="uid://d3mqy31jnmnom" path="res://sprites/IMG_3444.PNG" id="1_rroxm"]
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="2_qrrfs"]
+
+[resource]
+script = ExtResource("2_qrrfs")
+type = 2
+casting_type = 1
+name = "Спальный мешок"
+duration = 3
+energy = -5.0
+energy_buff = 5.0
+control_buff = 5.0
+icon = ExtResource("1_rroxm")

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://dn7yavh7byags"]
+
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="1_4wqht"]
+[ext_resource type="Texture2D" uid="uid://baf8qdmc0xvvo" path="res://sprites/IMG_3433.PNG" id="1_5p3uf"]
+
+[resource]
+script = ExtResource("1_4wqht")
+risk_level = 1
+type = 1
+name = "Отвести взгляд"
+energy = -10.0
+control = -5.0
+panic = -10.0
+icon = ExtResource("1_5p3uf")

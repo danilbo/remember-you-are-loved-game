@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://d4idtmisc0uhs"]
+
+[ext_resource type="Texture2D" uid="uid://dv6f5b2dkm46t" path="res://sprites/IMG_3421.PNG" id="1_x85au"]
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="2_heapg"]
+
+[resource]
+script = ExtResource("2_heapg")
+risk_level = 1
+type = 1
+name = "Спланированное убийство"
+energy = -35.0
+control = -10.0
+kills = 1
+kill_type = 10
+icon = ExtResource("1_x85au")

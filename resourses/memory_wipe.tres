@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://b6rrfem7uc3ke"]
+
+[ext_resource type="Texture2D" uid="uid://b3vu3tr3irfux" path="res://sprites/IMG_3394.PNG" id="1_q8l4u"]
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="2_xk7ng"]
+
+[resource]
+script = ExtResource("2_xk7ng")
+casting_type = 1
+name = "Стирание памяти"
+duration = 1
+has_special_trigger = true
+mana = -40.0
+icon = ExtResource("1_q8l4u")

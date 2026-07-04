@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://s6cxu53nn2n7"]
+
+[ext_resource type="Texture2D" uid="uid://dar24k4jpwdjb" path="res://sprites/IMG_3423.PNG" id="1_r1hqf"]
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="2_6ec8x"]
+
+[resource]
+script = ExtResource("2_6ec8x")
+risk_level = 1
+type = 1
+name = "Украсть еду"
+energy = -15.0
+control = -5.0
+panic = 8.0
+special_triggers = ["steal_food", "steal_food", "steal_food"]
+icon = ExtResource("1_r1hqf")

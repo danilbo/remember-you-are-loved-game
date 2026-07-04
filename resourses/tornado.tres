@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://b6m5ygehhmnuo"]
+
+[ext_resource type="Texture2D" uid="uid://bxo3rh3x055m3" path="res://sprites/IMG_3398.PNG" id="1_3dc3d"]
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="1_r0n5w"]
+
+[resource]
+script = ExtResource("1_r0n5w")
+name = "Торнадо"
+mana = -35.0
+special_triggers = ["tornado"]
+icon = ExtResource("1_3dc3d")

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://d28ik2d0d8wkc"]
+
+[ext_resource type="Texture2D" uid="uid://dkfgqkkyr6bgq" path="res://sprites/IMG_3439.PNG" id="1_ye5bv"]
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="2_np86x"]
+
+[resource]
+script = ExtResource("2_np86x")
+type = 1
+name = "Выпросить еду"
+energy = -7.0
+control = 3.0
+panic = -2.0
+special_triggers = ["beg_for_food"]
+icon = ExtResource("1_ye5bv")

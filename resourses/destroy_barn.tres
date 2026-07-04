@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://c7jinlrjjinyq"]
+
+[ext_resource type="Texture2D" uid="uid://tl0jokvh4q6y" path="res://sprites/IMG_3424.PNG" id="1_llq1i"]
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="2_478i0"]
+
+[resource]
+script = ExtResource("2_478i0")
+risk_level = 2
+type = 1
+name = "Сжечь амбар"
+energy = -20.0
+control = -15.0
+demolish_buildings = 1
+kill_type = 10
+special_triggers = ["burn_the_barn"]
+icon = ExtResource("1_llq1i")

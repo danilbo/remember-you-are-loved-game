@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://clm5h62ppc085"]
+
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="1_3n8ik"]
+[ext_resource type="Texture2D" uid="uid://2q7syfdepbe3" path="res://sprites/IMG_3442.PNG" id="1_ejmyc"]
+
+[resource]
+script = ExtResource("1_3n8ik")
+type = 2
+name = "Еда"
+hp = 2.0
+energy = 5.0
+control = 5.0
+icon = ExtResource("1_ejmyc")

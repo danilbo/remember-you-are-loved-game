@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://tw06bdssl5bi"]
+
+[ext_resource type="Texture2D" uid="uid://bqfxjuqedpq8h" path="res://sprites/IMG_3446.PNG" id="1_islhm"]
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="2_sa1xf"]
+
+[resource]
+script = ExtResource("2_sa1xf")
+type = 2
+casting_type = 1
+name = "Костёр"
+duration = 1
+has_special_trigger = true
+icon = ExtResource("1_islhm")

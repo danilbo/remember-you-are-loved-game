@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://cqe5t5q03k0or"]
+
+[ext_resource type="Texture2D" uid="uid://dgli41543r5mu" path="res://sprites/IMG_3449.PNG" id="1_r2vyn"]
+[ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="2_a75q8"]
+
+[resource]
+script = ExtResource("2_a75q8")
+type = 2
+casting_type = 1
+name = "Странное зелье"
+duration = 1
+has_special_trigger = true
+icon = ExtResource("1_r2vyn")
