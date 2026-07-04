@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://eokgwynddnx5"]
 
 [ext_resource type="Script" uid="uid://s8hpnk3nuxuh" path="res://game/map/map_node/map_node.gd" id="1_l6gys"]
-[ext_resource type="Texture2D" uid="uid://ct3dc0p8o6tkb" path="res://icon.svg" id="2_uyxse"]
+[ext_resource type="Texture2D" uid="uid://thvvhsoif5ij" path="res://sprites/магаз.png" id="2_l6gys"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o2dgb"]
 size = Vector2(133, 131)
@@ -16,7 +16,8 @@ position = Vector2(56.5, 55.5)
 shape = SubResource("RectangleShape2D_o2dgb")
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D/CollisionShape2D" unique_id=211704350]
-texture = ExtResource("2_uyxse")
+scale = Vector2(0.435, 0.435)
+texture = ExtResource("2_l6gys")
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://c7x80rdqfeh2s"]
 
 [ext_resource type="Script" uid="uid://cjh4llwh6bnhb" path="res://game/ui/hud/hud_widget.gd" id="1_3plaq"]
+[ext_resource type="Texture2D" uid="uid://ctsibdtgjcdvi" path="res://sprites/времяхз.png" id="2_08v6r"]
+[ext_resource type="Texture2D" uid="uid://drxvbssvleqj3" path="res://sprites/души.png" id="3_v1l7f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_border"]
 bg_color = Color(1, 1, 1, 1)
@@ -84,9 +86,16 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 42
-text = "⌛"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Content/HourglassIcon" unique_id=863841175]
+layout_mode = 0
+offset_top = 5.11
+offset_right = 300.0
+offset_bottom = 305.11
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("2_08v6r")
 
 [node name="HourglassValue" type="Label" parent="Content" unique_id=37700182]
 unique_name_in_owner = true
@@ -156,17 +165,23 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_mana_fill")
 
 [node name="SoulLabel" type="Label" parent="Content" unique_id=602269117]
 layout_mode = 0
-offset_left = 405.0
-offset_top = 16.0
-offset_right = 535.0
-offset_bottom = 56.0
+offset_left = 472.855
+offset_top = 11.265
+offset_right = 602.8554
+offset_bottom = 56.265
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
-text = "(soul)"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Content/SoulLabel" unique_id=256563447]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 300.0
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("3_v1l7f")
 
 [node name="SoulValue" type="Label" parent="Content" unique_id=446228829]
 unique_name_in_owner = true

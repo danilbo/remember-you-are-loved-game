@@ -10,6 +10,8 @@ const TOOLTIP_SCENE = preload("res://game/ui/universal_tooltip/universal_tooltip
 @export var main_gameplay_node : RootNode
 @export var shop_node : Node2D
 
+@export var bg_sprite : Sprite2D
+
 @onready var hud_widget: HudWidget = $CanvasLayer/HudWidget
 @onready var camera : Camera2D = $Camera2D
 
@@ -38,7 +40,8 @@ func game_start():
 	new_node[0].data.icon = camp_icon
 	new_node[0].village_resource.generate(GlobalVariables.current_level)
 	new_node[0].data.description = new_node[0].village_resource.get_desc()
-	new_node[0].data.title = new_node[0].village_resource.get_village_name()	
+	new_node[0].data.title = new_node[0].village_resource.get_village_name()
+	new_node[0].sprite_2d.texture = new_node[0].data.icon
 
 func _subscribe_gameplay():
 	main_gameplay_node.player_node_ext.on_player_stats_change.connect(player_stats_updated)
@@ -154,10 +157,12 @@ func on_fade_change(show : bool, request_id : int):
 		if selected_dot_type == MapNode.DOT_TYPES.LEVEL:
 			main_gameplay_node.show()
 			map_manager.hide()
+			bg_sprite.hide()
 			main_gameplay_node.player_node_ext.new_turn()
 			
 		else:
 			map_manager.hide()
+			bg_sprite.hide()
 			shop_node.show()
 			shop_node.create_shop(24)
 			shop_node.shop_close_in_progress = false
@@ -185,6 +190,7 @@ func _handle_on_shop_close() -> void:
 	await do_change_screen_logic(false)
 	shop_node.hide()
 	map_manager.show()
+	bg_sprite.show()
 	do_change_screen_logic(true)
 	generate_new_nodes(true)
 
@@ -196,6 +202,7 @@ func on_level_end() -> void:
 	await do_change_screen_logic(false)
 	main_gameplay_node.hide()
 	map_manager.show()
+	bg_sprite.show()
 	do_change_screen_logic(true)
 	generate_new_nodes()
 	
@@ -256,6 +263,8 @@ func generate_new_nodes(no_shop : bool = false) -> void:
 			i.data.icon = shop_icon
 			i.data.description = "Тут можно навсегда получить карты за души!"
 			i.data.title = "Магазин"
+			
+		i.sprite_2d.texture = i.data.icon
 
 
 
