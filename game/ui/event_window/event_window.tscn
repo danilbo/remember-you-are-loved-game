@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://b2y0iwn4qyold"]
+
+[ext_resource type="Script" uid="uid://dvp8yv556t807" path="res://game/ui/event_window/event_window.gd" id="1_jbthq"]
+[ext_resource type="Texture2D" uid="uid://ct3dc0p8o6tkb" path="res://icon.svg" id="2_syrwa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5shr"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+
+[node name="EventWindow" type="Control" unique_id=433618870]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jbthq")
+
+[node name="EventPanel" type="Panel" parent="." unique_id=638044862]
+custom_maximum_size = Vector2(0, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m5shr")
+
+[node name="EventContent" type="VBoxContainer" parent="EventPanel" unique_id=710215830]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -363.0
+offset_top = -342.5
+offset_right = 363.0
+offset_bottom = 342.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Image" type="TextureRect" parent="EventPanel/EventContent" unique_id=1189821938]
+custom_minimum_size = Vector2(20, 20)
+custom_maximum_size = Vector2(1000, 500)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_syrwa")
+stretch_mode = 6
+
+[node name="HSeparator" type="HSeparator" parent="EventPanel/EventContent" unique_id=1101892952]
+layout_mode = 2
+
+[node name="TextContent" type="VBoxContainer" parent="EventPanel/EventContent" unique_id=1969234020]
+custom_minimum_size = Vector2(0, 300)
+custom_maximum_size = Vector2(1000, 350)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="EventPanel/EventContent/TextContent" unique_id=365502910]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "СОБЫТИЕ"
+horizontal_alignment = 1
+
+[node name="CenterContainer2" type="CenterContainer" parent="EventPanel/EventContent/TextContent" unique_id=1189429883]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="Description" type="Label" parent="EventPanel/EventContent/TextContent/CenterContainer2" unique_id=1262118079]
+custom_maximum_size = Vector2(-1, 500)
+layout_mode = 2
+text = "Описаниеdasdasd
+asdasdasd
+asdasdasdasdasdadsasdasd
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="EventPanel/EventContent/TextContent" unique_id=1651043349]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ButtonContinue" type="Button" parent="EventPanel/EventContent/TextContent/CenterContainer" unique_id=1499220979]
+layout_mode = 2
+text = "ПРОДОЛЖИТЬ"
