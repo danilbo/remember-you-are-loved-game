@@ -1,63 +1,72 @@
 [gd_scene format=3 uid="uid://b2y0iwn4qyold"]
 
 [ext_resource type="Script" uid="uid://dvp8yv556t807" path="res://game/ui/event_window/event_window.gd" id="1_jbthq"]
-[ext_resource type="Texture2D" uid="uid://ct3dc0p8o6tkb" path="res://icon.svg" id="2_syrwa"]
+[ext_resource type="Texture2D" uid="uid://dfqmdxvg4shp3" path="res://sprites/eventWindowBackground.PNG" id="2_ljjtk"]
+[ext_resource type="Texture2D" uid="uid://dxbqsi5je7tj5" path="res://sprites/Introduction.PNG" id="3_08omj"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5shr"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ljjtk"]
 
 [node name="EventWindow" type="Control" unique_id=433618870]
+custom_maximum_size = Vector2(1920, 1080)
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jbthq")
 
-[node name="EventPanel" type="Panel" parent="." unique_id=638044862]
-custom_maximum_size = Vector2(0, 0)
+[node name="EventBackground" type="TextureRect" parent="." unique_id=1189821938]
+custom_maximum_size = Vector2(1920, 1080)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_m5shr")
+size_flags_vertical = 3
+texture = ExtResource("2_ljjtk")
+stretch_mode = 6
+
+[node name="Image" type="TextureRect" parent="." unique_id=1149260723]
+custom_maximum_size = Vector2(1000, 1000)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -1100.0
+offset_right = 1800.0
+offset_bottom = 1100.0
+grow_vertical = 2
+texture = ExtResource("3_08omj")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="EventPanel" type="Panel" parent="." unique_id=638044862]
+custom_maximum_size = Vector2(1000, 1000)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -896.0
+offset_top = 40.0
+offset_right = -43.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 2
+offset_transform_enabled = true
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ljjtk")
 
 [node name="EventContent" type="VBoxContainer" parent="EventPanel" unique_id=710215830]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -363.0
-offset_top = -342.5
 offset_right = 363.0
-offset_bottom = 342.5
+offset_bottom = 685.0
 grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Image" type="TextureRect" parent="EventPanel/EventContent" unique_id=1189821938]
-custom_minimum_size = Vector2(20, 20)
-custom_maximum_size = Vector2(1000, 500)
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("2_syrwa")
-stretch_mode = 6
-
-[node name="HSeparator" type="HSeparator" parent="EventPanel/EventContent" unique_id=1101892952]
-layout_mode = 2
 
 [node name="TextContent" type="VBoxContainer" parent="EventPanel/EventContent" unique_id=1969234020]
 custom_minimum_size = Vector2(0, 300)
