@@ -157,6 +157,7 @@ func player_stats_updated(hp : float, energy : float, control : float, mana : fl
 		hud_widget.set_control_value(control)
 		
 	hud_widget.set_soul_value(souls)
+	hud_widget.set_hourglass_value(GlobalVariables.current_turn)
 
 
 func _handle_on_shop_close() -> void:

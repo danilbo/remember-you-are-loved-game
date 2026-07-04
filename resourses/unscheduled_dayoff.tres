@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Logical_card" load_steps=3 format=3 uid="uid://bceaaftw5pwpa"]
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://bceaaftw5pwpa"]
 
 [ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="1_0jgra"]
 [ext_resource type="Texture2D" uid="uid://dxiv88n25at81" path="res://sprites/IMG_3406.PNG" id="1_gl814"]
 
 [resource]
 script = ExtResource("1_0jgra")
-dumb_card = true
 casting_type = 1
 name = "Внеплановый выходной"
+desctiption = "Все фермеры не производят еду на этом ходу.
+Мана: - -
+Паника: + +"
 duration = 1
-mana = -35.0
+mana = -25.0
 special_triggers = ["unscheduled_dayoff"]
 panic_buff = 20.0
 icon = ExtResource("1_gl814")

@@ -8,6 +8,11 @@ script = ExtResource("2_heapg")
 risk_level = 1
 type = 1
 name = "Спланированное убийство"
+desctiption = "Убивает случайного человека 
+Контроль -
+Энергия - - -
+Паника: +
+Уровень риска: 2"
 energy = -35.0
 control = -10.0
 kills = 1

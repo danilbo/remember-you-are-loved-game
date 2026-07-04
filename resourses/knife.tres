@@ -8,6 +8,8 @@ script = ExtResource("1_hhi1n")
 type = 2
 casting_type = 1
 name = "Нож"
+desctiption = "Одноразовый
+Убийства требуют меньше энергии "
 duration = 99999
 has_special_trigger = true
 icon = ExtResource("1_blas1")

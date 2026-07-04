@@ -7,6 +7,10 @@
 script = ExtResource("1_n3qlb")
 type = 1
 name = "Помочь местным"
+desctiption = "Контроль: +
+Энергия: - -
+Паника: -
+Уровень риска: 1"
 energy = -15.0
 control = 5.0
 panic = -5.0

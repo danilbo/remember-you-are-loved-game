@@ -8,6 +8,8 @@ script = ExtResource("2_sa1xf")
 type = 2
 casting_type = 1
 name = "Костёр"
+desctiption = "Энергия увеличивается в 2 раза быстрее от всего, что добавляет энергию, кроме пассивных карт
+Действует 1 ход"
 duration = 1
 has_special_trigger = true
 icon = ExtResource("1_islhm")

@@ -8,6 +8,12 @@ script = ExtResource("2_478i0")
 risk_level = 2
 type = 1
 name = "Сжечь амбар"
+desctiption = "Уничтожает 1 дом, удаляет 1/5 от общего запаса еды
+Контроль: - -
+Энергия: - -
+Паника: + + +
+Уровень риска: 3
+*Людям это не понравится"
 energy = -30.0
 control = -20.0
 demolish_buildings = 1

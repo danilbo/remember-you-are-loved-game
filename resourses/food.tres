@@ -7,6 +7,9 @@
 script = ExtResource("1_3n8ik")
 type = 2
 name = "Еда"
+desctiption = "Используется сразу
+Энергия: +
+Контроль: +"
 hp = 2.0
 energy = 5.0
 control = 5.0

@@ -8,6 +8,8 @@ script = ExtResource("2_olq8d")
 type = 2
 casting_type = 1
 name = "Ритуальный нож"
+desctiption = "Одноразовый
+Убийства дают в 2 раза больше маны"
 duration = 9999
 has_special_trigger = true
 icon = ExtResource("1_1ltiv")

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Logical_card" load_steps=3 format=3 uid="uid://csg3cbordy337"]
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://csg3cbordy337"]
 
 [ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="1_44i6m"]
 [ext_resource type="Texture2D" uid="uid://cavs1oq3iuafy" path="res://sprites/IMG_3445.PNG" id="1_v0fxr"]
@@ -8,6 +8,9 @@ script = ExtResource("1_44i6m")
 type = 2
 casting_type = 1
 name = "Самодельное убежище"
+desctiption = "Следующее погодное явление вам не заденет персонажа, уничтожается после законтренного удара
+При касте:
+Энергия: - - -"
 duration = 99999
 has_special_trigger = true
 energy = -50.0

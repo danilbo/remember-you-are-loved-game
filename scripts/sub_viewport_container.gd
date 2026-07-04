@@ -139,6 +139,10 @@ func _refresh_texture():
 
 func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint():
+		if logical_res == null and mouse_on or logical_res != null and logical_res.position == logical_res.POSITIONS.GRAVE and mouse_on:
+			if not in_shop:
+				on_unhovered.emit()
+		
 		if termination_seq:
 			termination_ticks -= 1
 			
@@ -262,10 +266,6 @@ func _process(_delta: float) -> void:
 
 func generate_from_resource() -> void:
 	icon_texture_rect.texture = logical_res.icon.duplicate_deep(Resource.DEEP_DUPLICATE_ALL)
-
-
-func play() -> void:
-	pass
 
 
 func _on_mouse_entered() -> void:

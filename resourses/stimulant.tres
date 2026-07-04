@@ -8,6 +8,10 @@ script = ExtResource("2_4e2ur")
 type = 2
 casting_type = 1
 name = "Стимулятор"
+desctiption = "Энергия уменьшается в 2 раза медленнее от всего, что убавляет энергию
+HP: -
+Действует 1 ход"
 duration = 1
 has_special_trigger = true
+hp = -5.0
 icon = ExtResource("1_d7fn1")

@@ -7,6 +7,9 @@
 script = ExtResource("2_54g03")
 type = 1
 name = "Медитировать"
+desctiption = "Контроль: +
+Энергия: -
+Уровень риска: 1"
 energy = -5.0
 control = 5.0
 icon = ExtResource("1_h3wdr")

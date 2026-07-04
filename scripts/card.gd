@@ -13,7 +13,7 @@ enum POSITIONS{DECK, HAND, GRAVE, PASSSIVE}
 @export var type : TYPES
 @export var casting_type : CASTING_TYPES
 @export var name : String
-@export var desctiption : String
+@export_multiline() var desctiption : String
 
 @export_subgroup("Buff and debuff")
 @export var duration : int
