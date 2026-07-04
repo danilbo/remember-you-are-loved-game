@@ -27,6 +27,7 @@ func toggle_pause():
 		get_tree().root.add_child(pause_menu)
 
 	if pause_menu.visible:
+		pause_menu.stopMusic()
 		# Меню уже видно — запускаем анимацию скрытия
 		pause_menu.play_transition(false)
 		# пауза снимется в _finish_hide() по окончании анимации
@@ -35,5 +36,6 @@ func toggle_pause():
 		get_tree().paused = true
 		on_pause = true
 		pause_menu.visible = true
+		pause_menu.playMusic()
 		pause_menu.sync_sliders()
 		pause_menu.play_transition(true)
