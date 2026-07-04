@@ -23,22 +23,30 @@ var _screen_change_tween: Tween
 
 func _ready() -> void:
 	#hud_widget.set_visible(false)
-	player_stats_updated(100., 100., 100., 100., 0)
+	
 	spawn_universal_tooltip()
 	spawn_map_manager()
-	var new_node = map_manager.spawn_next_nodes(1)
-	map_manager.gameplay_node_selected.connect(_handle_gameplay_select)
+	_subscribe_gameplay()
+	_subscribe_shop()
+	game_start()
+
 	
+func game_start():
+	player_stats_updated(100., 100., 100., 100., 0)
+	var new_node = map_manager.spawn_next_nodes(1)
+	map_manager.gameplay_node_selected.connect(_handle_gameplay_select)	
 	new_node[0].data.icon = camp_icon
 	new_node[0].village_resource.generate(GlobalVariables.current_level)
 	new_node[0].data.description = new_node[0].village_resource.get_desc()
-	new_node[0].data.title = new_node[0].village_resource.get_village_name()
-	
+	new_node[0].data.title = new_node[0].village_resource.get_village_name()	
+
+func _subscribe_gameplay():
 	main_gameplay_node.player_node_ext.on_player_stats_change.connect(player_stats_updated)
 	main_gameplay_node.on_level_end.connect(on_level_end)
 	main_gameplay_node.on_card_hovered.connect(_handler_on_card_hover)
-	main_gameplay_node.on_card_unhovered.connect(_handler_on_card_unhover)
-	
+	main_gameplay_node.on_card_unhovered.connect(_handler_on_card_unhover)	
+
+func _subscribe_shop():
 	shop_node.on_card_hovered.connect(_handler_on_card_hover)
 	shop_node.on_card_unhovered.connect(_handler_on_card_unhover)
 	shop_node.on_shop_closing.connect(_handle_on_shop_close)
@@ -62,6 +70,7 @@ func spawn_map_manager():
 	map_manager.on_any_node_hovered.connect(_handle_node_hovered)
 	map_manager.on_any_node_unhovered.connect(_handle_node_unhovered)
 	map_manager.screen_change_requested.connect(_handle_screen_change_requested)
+	map_manager.on_screen_overflow.connect(_handle_screen_overflow)
 
 func spawn_universal_tooltip():
 	universal_tooltip = TOOLTIP_SCENE.instantiate()
@@ -178,6 +187,9 @@ func _handle_on_shop_close() -> void:
 	do_change_screen_logic(true)
 	generate_new_nodes(true)
 
+func _handle_screen_overflow():
+	pass
+	
 
 func on_level_end() -> void:
 	await do_change_screen_logic(false)

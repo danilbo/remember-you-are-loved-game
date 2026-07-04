@@ -9,6 +9,7 @@ signal on_any_node_unhovered()
 signal screen_change_requested(show: bool, request_id: int)
 signal screen_change_finished(request_id: int)
 signal gameplay_node_selected(node : MapNode)
+signal on_screen_overflow
 
 var data_paths: Array[String] = [
 	"res://game/resources/default_map_node.tres",
@@ -18,7 +19,7 @@ var data_paths: Array[String] = [
 @export_category("Map node positining values")
 @export var current_pos : Vector2 = Vector2(-50,500)
 @export var y_step := 200
-@export var x_step := 200
+@export var x_step := 600
 @export var x_random_offset := 20
 
 @export_category("draw line params")
@@ -28,7 +29,7 @@ var data_paths: Array[String] = [
 @export var line_color := Color.WHITE
 @export var line_width := 4.0
 @export var targe_center_offset:= 55.0
-
+@export var _active_part := .6
 var passed_nodes : Array[MapNode] = []
 var possible_nodes : Array[MapNode] = []
 var _drawn_lines: Array[PackedVector2Array] = []
@@ -37,12 +38,21 @@ var _active_line_progress := 0.0
 var _active_line_tween: Tween
 var _is_transitioning := false
 var _screen_change_request_id := 0
+@export var map_offset_x:= 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
+func get_current_pos() -> Vector2:
+	if passed_nodes.size() <= 0:
+		return current_pos
+	return passed_nodes[passed_nodes.size()-1].position
 
+func get_current_global_pos() -> Vector2:
+	if passed_nodes.size() <= 0:
+		return current_pos
+	return passed_nodes[passed_nodes.size()-1].global_position
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -54,8 +64,21 @@ func _draw() -> void:
 
 	if _active_line.size() == 2:
 		_draw_dashed_line(_active_line[0], _active_line[1], _active_line_progress)
+
+func _check_screen():
+	print("current_pos is")
+	print(current_pos)
+	if get_viewport_rect().size.x * _active_part <= get_current_pos().x - map_offset_x:
+		
+		global_position.x -=  get_viewport_rect().size.x / 2;
+		map_offset_x +=  get_viewport_rect().size.x / 2;
+		on_screen_overflow.emit()
+	
+	
 	
 func spawn_next_nodes(amount : int) -> Array[MapNode]:
+	_check_screen()
+		
 	var target_points := get_points(current_pos, amount)
 	possible_nodes.clear()
 	for point in target_points:
@@ -77,7 +100,7 @@ func get_points(start: Vector2, count: int) -> Array[Vector2]:
 	for i in range(count):
 		var x := start.x + x_step + randf_range(-x_random_offset, x_random_offset)
 		var y := first_y + i * y_step
-		if y < 10 or y > 900:
+		if y < 200 or y > 800:
 			continue
 		points.append(Vector2(x, y))
 
