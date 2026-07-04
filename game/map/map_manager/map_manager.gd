@@ -59,7 +59,7 @@ func spawn_next_nodes(amount : int) -> Array[MapNode]:
 	var target_points := get_points(current_pos, amount)
 	possible_nodes.clear()
 	for point in target_points:
-		var node :=spawn_map_node(point)
+		var node :=spawn_map_node(point, MapNodeData.new())
 		possible_nodes.append(node)
 		
 	
@@ -94,13 +94,11 @@ func _on_node_hover_handle(data : MapNodeData):
 func _on_node_unhover_handle():
 	on_any_node_unhovered.emit()
 
-func spawn_map_node(position: Vector2) -> MapNode:
+func spawn_map_node(position: Vector2, new_data : MapNodeData) -> MapNode:
 	var node : MapNode = MAP_NODE_SCENE.instantiate()
 	node.position = position
 	add_child(node)
-	node.set_data(load(
-	data_paths[0] if possible_nodes.size() % 2 == 0 else data_paths[1]
-))
+	node.set_data(new_data)
 	node.hovered.connect(_on_node_hover_handle)
 	node.unhovered.connect(_on_node_unhover_handle)
 	node.clicked.connect(_handle_node_click)

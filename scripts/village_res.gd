@@ -23,7 +23,6 @@ var current_panic : float #from 0 to 100
 @export var buildings : int
 @export var buildings_size : int #how much citizens can be stored inside one house
 
-
 var citizens_const : int = citizens
 var kill_on_that_turn : bool = false
 var unscheduled_dayoff : bool = false
