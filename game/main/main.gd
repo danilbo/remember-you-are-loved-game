@@ -150,6 +150,7 @@ func _handle_screen_change_requested(show: bool, request_id: int) -> void:
 func on_fade_change(show : bool, request_id : int):
 	if not show:
 		if selected_dot_type == MapNode.DOT_TYPES.LEVEL:
+			village_widget.visible = true
 			main_gameplay_node.show()
 			map_manager.hide()
 			main_gameplay_node.player_node_ext.new_turn()
@@ -185,10 +186,10 @@ func _handle_on_shop_close() -> void:
 
 func _handle_screen_overflow():
 	pass
-	
 
 func on_level_end() -> void:
 	await do_change_screen_logic(false)
+	village_widget.visible = false
 	main_gameplay_node.hide()
 	map_manager.show()
 	do_change_screen_logic(true)
@@ -249,12 +250,7 @@ func generate_new_nodes(no_shop : bool = false) -> void:
 			i.data.description = "Тут можно навсегда получить карты за души!"
 			i.data.title = "Магазин"
 
-
-func _handle_village_data_updated():
-	village_widget
-	pass
-
-
-func _handle_on_village_stats_change(citizens : int, current_panic : float, farmers : int, food : int, buildings : int, buildings_size : int):
-	print(citizens, "  ", current_panic)
-
+func _handle_on_village_stats_change(citizens : int, current_panic : float, 
+			farmers : int, food : int, buildings : int, buildings_size : int):
+	$CanvasLayer/VillageWidget.update_data(citizens, current_panic,farmers,
+	food, buildings, buildings_size)

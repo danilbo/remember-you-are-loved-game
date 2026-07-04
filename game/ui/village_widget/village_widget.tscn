@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cemby01toyhng"]
 
 [ext_resource type="Texture2D" uid="uid://cirhit0gfe0wa" path="res://sprites/widget/sidewidget_bg.PNG" id="1_qathi"]
+[ext_resource type="Script" uid="uid://b4gflj68p8sus" path="res://game/ui/village_widget/village_widget.gd" id="1_x6o31"]
 
 [node name="VillageWidget" type="Control" unique_id=769462666]
 custom_minimum_size = Vector2(150, 300)
@@ -15,6 +16,7 @@ offset_top = -150.0
 offset_bottom = 150.0
 grow_horizontal = 0
 grow_vertical = 2
+script = ExtResource("1_x6o31")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1428729477]
 layout_mode = 1
@@ -43,7 +45,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Control" type="Control" parent="TextureRect/HBoxContainer" unique_id=1795154630]
-custom_minimum_size = Vector2(15, 0)
+custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/HBoxContainer" unique_id=1607499195]
@@ -56,29 +58,23 @@ layout_mode = 2
 [node name="Sitezens" type="Label" parent="TextureRect/HBoxContainer/VBoxContainer" unique_id=1794042780]
 layout_mode = 2
 text = "жители: 99"
-horizontal_alignment = 2
 
 [node name="Panic" type="Label" parent="TextureRect/HBoxContainer/VBoxContainer" unique_id=2094579766]
 layout_mode = 2
 text = "Уровень Паники: 100%"
-horizontal_alignment = 2
 
 [node name="BuildindSize" type="Label" parent="TextureRect/HBoxContainer/VBoxContainer" unique_id=675903354]
 layout_mode = 2
 text = "Размер: огромный"
-horizontal_alignment = 2
 
 [node name="Farmers" type="Label" parent="TextureRect/HBoxContainer/VBoxContainer" unique_id=1117810582]
 layout_mode = 2
 text = "Фермеры: 100"
-horizontal_alignment = 2
 
 [node name="Food" type="Label" parent="TextureRect/HBoxContainer/VBoxContainer" unique_id=1979745995]
 layout_mode = 2
 text = "Еда: 999"
-horizontal_alignment = 2
 
 [node name="Buildings" type="Label" parent="TextureRect/HBoxContainer/VBoxContainer" unique_id=998018850]
 layout_mode = 2
 text = "Здания: 20"
-horizontal_alignment = 2
