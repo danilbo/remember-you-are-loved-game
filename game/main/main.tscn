@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c7x80rdqfeh2s" path="res://game/ui/hud/hud_widget.tscn" id="4_dsy3x"]
 [ext_resource type="PackedScene" uid="uid://cn2due6g2h7cj" path="res://scenes/root.tscn" id="5_tkdpa"]
 [ext_resource type="PackedScene" uid="uid://6w6hr2d4mgia" path="res://scenes/shop.tscn" id="6_yymkh"]
+[ext_resource type="AudioStream" uid="uid://cq8y1yc4drled" path="res://game/assets/sounds/music/GaymeMain2.ogg" id="7_sifka"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5520f"]
 shader = ExtResource("2_psm6y")
@@ -45,3 +46,8 @@ shop_node = NodePath("../Shop")
 [node name="Shop" parent="." unique_id=2134154319 node_paths=PackedStringArray("main_gameplay_node") instance=ExtResource("6_yymkh")]
 visible = false
 main_gameplay_node = NodePath("../Root")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="." unique_id=1101259127]
+stream = ExtResource("7_sifka")
+autoplay = true
+bus = &"Music"

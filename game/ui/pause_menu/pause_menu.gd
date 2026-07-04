@@ -6,6 +6,8 @@ extends CanvasLayer
 @onready var menu_panel = $CenterContainer/MenuPanel
 @onready var dim_bg = $DimBackground
 @onready var blur_bg = $BlurBackground
+@onready var click_sound = $ClickSound
+@onready var music_player = $MusicPlayer
 
 var tween: Tween
 
@@ -90,15 +92,18 @@ func _make_white_circle(size: int) -> ImageTexture:
 	return ImageTexture.create_from_image(img)
 
 func _on_continue_pressed():
+	click_sound.play()
 	GlobalVariables.toggle_pause()
 
 func _on_exit_pressed():
+	click_sound.play()
 	get_tree().quit()
 
 func _on_music_changed(value: float):
 	GlobalVariables.music_volume = value
 
 func _on_sfx_changed(value: float):
+	click_sound.play()
 	GlobalVariables.sfx_volume = value
 
 func sync_sliders():
@@ -131,3 +136,9 @@ func _finish_hide():
 	visible = false
 	GlobalVariables.on_pause = false
 	get_tree().paused = false
+
+func playMusic():
+	music_player.play()
+
+func stopMusic():
+	music_player.stop()
