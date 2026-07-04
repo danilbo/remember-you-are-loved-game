@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://ek1er3wjrmw0"]
+
+[ext_resource type="Script" uid="uid://cd3yoyp3xq5ee" path="res://scripts/sfx_logic.gd" id="1_o2opl"]
+[ext_resource type="AudioStream" uid="uid://betwhx7igvhok" path="res://game/assets/sounds/sfx/dealing crads.wav" id="2_1rof8"]
+[ext_resource type="AudioStream" uid="uid://yb0eq6w46vmq" path="res://game/assets/sounds/sfx/drawing a card.wav" id="3_siqfj"]
+[ext_resource type="AudioStream" uid="uid://dsxneodg05qid" path="res://game/assets/sounds/sfx/Menu click.wav" id="4_e1j3f"]
+[ext_resource type="AudioStream" uid="uid://bd0yeyp082i0i" path="res://game/assets/sounds/sfx/put down the card2.wav" id="5_46e3o"]
+[ext_resource type="AudioStream" uid="uid://cb2kgvdtviwmn" path="res://game/assets/sounds/sfx/put down the card.wav" id="6_r4qvp"]
+[ext_resource type="AudioStream" uid="uid://dxqniaqolfwi6" path="res://game/assets/sounds/sfx/ruffle shuffle.wav" id="7_3lnwx"]
+[ext_resource type="AudioStream" uid="uid://hrsysbgmb73o" path="res://game/assets/sounds/sfx/take a card.wav" id="8_3vgpi"]
+
+[node name="SfxScene" type="Node2D" unique_id=1475853324]
+script = ExtResource("1_o2opl")
+
+[node name="DealingCardsPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1658227984]
+stream = ExtResource("2_1rof8")
+bus = &"SFX"
+
+[node name="DrawingCardPlayer" type="AudioStreamPlayer2D" parent="." unique_id=15815638]
+stream = ExtResource("3_siqfj")
+bus = &"SFX"
+
+[node name="MenuClickPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1836976274]
+stream = ExtResource("4_e1j3f")
+bus = &"SFX"
+
+[node name="PutDownCardPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1289529088]
+stream = ExtResource("5_46e3o")
+bus = &"SFX"
+
+[node name="PutDownCard2Player" type="AudioStreamPlayer2D" parent="." unique_id=569476884]
+stream = ExtResource("6_r4qvp")
+bus = &"SFX"
+
+[node name="RuffleShufflePlayer" type="AudioStreamPlayer2D" parent="." unique_id=339745837]
+stream = ExtResource("7_3lnwx")
+bus = &"SFX"
+
+[node name="TakeACardPlayer" type="AudioStreamPlayer2D" parent="." unique_id=863444679]
+stream = ExtResource("8_3vgpi")
+bus = &"SFX"
