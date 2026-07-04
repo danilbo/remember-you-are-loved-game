@@ -8,37 +8,30 @@ extends Node2D
 @onready var ruffleShufflePlayer = $RuffleShufflePlayer
 @onready var takeACardPlayer = $TakeACardPlayer
 
-func play_dealing_cards(vol_db: float = 0.0, pitch_scale: float = 1.0):
-	dealingCardsPlayer.volume_db = vol_db
+func play_dealing_cards(pitch_scale: float = 1.0):
 	dealingCardsPlayer.pitch_scale = pitch_scale
 	dealingCardsPlayer.play()
 
-func play_drawing_card(vol_db: float = 0.0, pitch_scale: float = 1.0):
-	drawingCardPlayer.volume_db = vol_db
+func play_drawing_card(pitch_scale: float = 1.0):
 	drawingCardPlayer.pitch_scale = pitch_scale
 	drawingCardPlayer.play()
 
-func play_menu_click(vol_db: float = 0.0, pitch_scale: float = 1.0):
-	menuClickPlayer.volume_db = vol_db
+func play_menu_click(pitch_scale: float = 1.0):
 	menuClickPlayer.pitch_scale = pitch_scale
 	menuClickPlayer.play()
 
-func play_put_down_card(vol_db: float = 0.0, pitch_scale: float = 1.0):
-	putDownCardPlayer.volume_db = vol_db
+func play_put_down_card(pitch_scale: float = 1.0):
 	putDownCardPlayer.pitch_scale = pitch_scale
 	putDownCardPlayer.play()
 
-func play_put_down_card2(vol_db: float = 0.0, pitch_scale: float = 1.0):
-	putDownCard2Player.volume_db = vol_db
+func play_put_down_card2(pitch_scale: float = 1.0):
 	putDownCard2Player.pitch_scale = pitch_scale
 	putDownCard2Player.play()
 
-func play_ruffle_shuffle(vol_db: float = 0.0, pitch_scale: float = 1.0):
-	ruffleShufflePlayer.volume_db = vol_db
+func play_ruffle_shuffle(pitch_scale: float = 1.0):
 	ruffleShufflePlayer.pitch_scale = pitch_scale
 	ruffleShufflePlayer.play()
 
-func play_take_a_card(vol_db: float = 0.0, pitch_scale: float = 1.0):
-	takeACardPlayer.volume_db = vol_db
+func play_take_a_card(pitch_scale: float = 1.0):
 	takeACardPlayer.pitch_scale = pitch_scale
 	takeACardPlayer.play()
