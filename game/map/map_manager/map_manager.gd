@@ -16,7 +16,7 @@ var data_paths: Array[String] = [
 ]
 
 @export_category("Map node positining values")
-@export var current_pos : Vector2 = Vector2(-50,200)
+@export var current_pos : Vector2 = Vector2(-50,500)
 @export var y_step := 200
 @export var x_step := 200
 @export var x_random_offset := 20
@@ -77,7 +77,7 @@ func get_points(start: Vector2, count: int) -> Array[Vector2]:
 	for i in range(count):
 		var x := start.x + x_step + randf_range(-x_random_offset, x_random_offset)
 		var y := first_y + i * y_step
-		if y < 10 or y > 500:
+		if y < 10 or y > 900:
 			continue
 		points.append(Vector2(x, y))
 
