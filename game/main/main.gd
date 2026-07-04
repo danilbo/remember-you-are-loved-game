@@ -12,6 +12,7 @@ const TOOLTIP_SCENE = preload("res://game/ui/universal_tooltip/universal_tooltip
 
 @onready var hud_widget: HudWidget = $CanvasLayer/HudWidget
 @onready var camera : Camera2D = $Camera2D
+@onready var village_widget:= $CanvasLayer/VillageWidget
 
 var shop_chance : int = 100
 var selected_dot_type : MapNode.DOT_TYPES
@@ -22,8 +23,6 @@ var map_manager : MapManager
 var _screen_change_tween: Tween
 
 func _ready() -> void:
-	#hud_widget.set_visible(false)
-	
 	spawn_universal_tooltip()
 	spawn_map_manager()
 	_subscribe_gameplay()
@@ -147,7 +146,6 @@ func _handle_screen_change_requested(show: bool, request_id: int) -> void:
 	map_manager.screen_change_finished.emit(request_id)
 	on_fade_change(show, request_id)
 
-
 func on_fade_change(show : bool, request_id : int):
 	if not show:
 		if selected_dot_type == MapNode.DOT_TYPES.LEVEL:
@@ -160,8 +158,6 @@ func on_fade_change(show : bool, request_id : int):
 			shop_node.show()
 			shop_node.create_shop(24)
 			shop_node.shop_close_in_progress = false
-			
-
 
 func player_stats_updated(hp : float, energy : float, control : float, mana : float, souls : int):
 	if mana != hud_widget.mana_value:
@@ -178,7 +174,6 @@ func player_stats_updated(hp : float, energy : float, control : float, mana : fl
 		
 	hud_widget.set_soul_value(souls)
 	hud_widget.set_hourglass_value(GlobalVariables.current_turn)
-
 
 func _handle_on_shop_close() -> void:
 	await do_change_screen_logic(false)
@@ -197,8 +192,7 @@ func on_level_end() -> void:
 	map_manager.show()
 	do_change_screen_logic(true)
 	generate_new_nodes()
-	
-	
+
 func _handler_on_card_hover(icon : Texture2D, res_name : String, desc : String):
 	var data : TooltipData = TooltipData.new()
 	
@@ -210,17 +204,15 @@ func _handler_on_card_hover(icon : Texture2D, res_name : String, desc : String):
 		return
 	universal_tooltip.set_data(data)
 	universal_tooltip.visible = true
-	
+
 func _handler_on_card_unhover():
 	universal_tooltip.visible = false
-
 
 func _handle_gameplay_select(node : MapNode):
 	selected_dot_type = node.dot_type
 	if node.dot_type == node.DOT_TYPES.LEVEL:
 		main_gameplay_node.player_node_ext.village.load_from_res(node.village_resource)
 		main_gameplay_node.reassign_for_village_type()
-
 
 func generate_new_nodes(no_shop : bool = false) -> void:
 	var new_nodes : Array[MapNode] = map_manager.spawn_next_nodes(3)
@@ -255,3 +247,7 @@ func generate_new_nodes(no_shop : bool = false) -> void:
 			i.data.icon = shop_icon
 			i.data.description = "Тут можно навсегда получить карты за души!"
 			i.data.title = "Магазин"
+
+func _handle_village_data_updated():
+	village_widget
+	pass

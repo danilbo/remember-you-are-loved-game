@@ -7,8 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://dau4lo36wgdtg" path="res://sprites/IMG_3353.PNG" id="3_jh1ax"]
 [ext_resource type="Texture2D" uid="uid://boj58otp8tewm" path="res://sprites/IMG_3428.PNG" id="3_y3xxt"]
 [ext_resource type="Shader" uid="uid://c5nxr6gk616x4" path="res://shaders/card_rofl.gdshader" id="4_j287u"]
+[ext_resource type="Texture2D" uid="uid://d2vms6vaembhs" path="res://sprites/camp/IMG_3509.PNG" id="4_jrhyn"]
 [ext_resource type="Script" uid="uid://df3ap4aggedit" path="res://scripts/sub_viewport_container.gd" id="5_5sfjl"]
 [ext_resource type="Texture2D" uid="uid://de7ev1vo2t4hy" path="res://sprites/IMG_3430.PNG" id="5_jh1ax"]
+[ext_resource type="Texture2D" uid="uid://byikaj6m3lb7i" path="res://sprites/camp/IMG_3508.PNG" id="5_log26"]
+[ext_resource type="Texture2D" uid="uid://bedoa6iw0woe1" path="res://sprites/camp/IMG_3507.PNG" id="6_gt4lb"]
 [ext_resource type="Script" uid="uid://bumscmtmqxxj" path="res://scripts/village_data.gd" id="6_y3xxt"]
 [ext_resource type="Shader" uid="uid://cvlglj5rt6h33" path="res://shaders/vibecoded_bullshiet.gdshader" id="7_3hfy5"]
 [ext_resource type="Texture2D" uid="uid://c5d8w767uwjkw" path="res://sprites/IMG_3352.PNG" id="8_l5cgh"]
@@ -126,9 +129,9 @@ hero_card_texture = ExtResource("3_y3xxt")
 village_sprite1 = NodePath("village_sprite1")
 village_sprite2 = NodePath("village_sprite2")
 village_sprite3 = NodePath("village_sprite3")
-camp_texture1 = ExtResource("3_jh1ax")
-camp_texture2 = ExtResource("8_l5cgh")
-camp_texture3 = ExtResource("9_vgks2")
+camp_texture1 = ExtResource("4_jrhyn")
+camp_texture2 = ExtResource("5_log26")
+camp_texture3 = ExtResource("6_gt4lb")
 village_texture1 = ExtResource("3_jh1ax")
 village_texture2 = ExtResource("8_l5cgh")
 village_texture3 = ExtResource("9_vgks2")

@@ -66,8 +66,6 @@ func _draw() -> void:
 		_draw_dashed_line(_active_line[0], _active_line[1], _active_line_progress)
 
 func _check_screen():
-	print("current_pos is")
-	print(current_pos)
 	if get_viewport_rect().size.x * _active_part <= get_current_pos().x - map_offset_x:
 		
 		global_position.x -=  get_viewport_rect().size.x / 2;

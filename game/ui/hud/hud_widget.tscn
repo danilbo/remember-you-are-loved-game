@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c7x80rdqfeh2s"]
 
 [ext_resource type="Script" uid="uid://cjh4llwh6bnhb" path="res://game/ui/hud/hud_widget.gd" id="1_3plaq"]
+[ext_resource type="Texture2D" uid="uid://bwqc3qpjaj1r1" path="res://sprites/widget/IMG_3517.PNG" id="2_shngl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_border"]
 bg_color = Color(1, 1, 1, 1)
@@ -45,6 +46,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
 [node name="HudWidget" type="Control" unique_id=1368737068]
+custom_minimum_size = Vector2(1920, 0)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,7 +56,16 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_3plaq")
 
+[node name="TextureRect" type="TextureRect" parent="." unique_id=252703298]
+layout_mode = 0
+offset_right = 1924.0
+offset_bottom = 223.0
+texture = ExtResource("2_shngl")
+expand_mode = 2
+stretch_mode = 4
+
 [node name="Background" type="ColorRect" parent="." unique_id=1181810654]
+visible = false
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0

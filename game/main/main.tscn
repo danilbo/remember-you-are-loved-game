@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ct3dc0p8o6tkb" path="res://icon.svg" id="2_sifka"]
 [ext_resource type="Texture2D" uid="uid://cirht3wr1hxnh" path="res://game/assets/noises/shader_noise_image.jpg" id="3_yil3p"]
 [ext_resource type="PackedScene" uid="uid://c7x80rdqfeh2s" path="res://game/ui/hud/hud_widget.tscn" id="4_dsy3x"]
+[ext_resource type="PackedScene" uid="uid://cemby01toyhng" path="res://game/ui/village_widget/village_widget.tscn" id="5_kk62w"]
 [ext_resource type="PackedScene" uid="uid://cn2due6g2h7cj" path="res://scenes/root.tscn" id="5_tkdpa"]
 [ext_resource type="PackedScene" uid="uid://6w6hr2d4mgia" path="res://scenes/shop.tscn" id="6_yymkh"]
 [ext_resource type="AudioStream" uid="uid://cq8y1yc4drled" path="res://game/assets/sounds/music/GaymeMain2.ogg" id="7_sifka"]
@@ -25,6 +26,17 @@ metadata/_edit_horizontal_guides_ = [-14237676.0]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1219891613]
 
+[node name="VillageWidget" parent="CanvasLayer" unique_id=769462666 instance=ExtResource("5_kk62w")]
+visible = false
+
+[node name="HudWidget" parent="CanvasLayer" unique_id=1154191608 instance=ExtResource("4_dsy3x")]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=206381221]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=305870142]
 material = SubResource("ShaderMaterial_5520f")
 anchors_preset = 15
@@ -34,14 +46,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
-
-[node name="HudWidget" parent="CanvasLayer" unique_id=1154191608 instance=ExtResource("4_dsy3x")]
-
-[node name="Control" type="Control" parent="CanvasLayer" unique_id=206381221]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="Root" parent="." unique_id=2078141277 node_paths=PackedStringArray("shop_node") instance=ExtResource("5_tkdpa")]
 visible = false
