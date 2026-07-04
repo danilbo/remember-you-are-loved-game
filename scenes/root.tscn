@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://c5d8w767uwjkw" path="res://sprites/IMG_3352.PNG" id="8_l5cgh"]
 [ext_resource type="Texture2D" uid="uid://6xsvxhsids3b" path="res://sprites/IMG_3351.PNG" id="9_vgks2"]
 [ext_resource type="Texture2D" uid="uid://dlst1bc0u8ci4" path="res://sprites/IMG_3510.PNG" id="14_vgks2"]
+[ext_resource type="Texture2D" uid="uid://cirhit0gfe0wa" path="res://sprites/widget/sidewidget_bg.PNG" id="18_gt4lb"]
 
 [sub_resource type="Shader" id="Shader_dylgi"]
 code = "shader_type canvas_item;
@@ -122,6 +123,22 @@ shader_parameter/edge_softness = 0.1070000050825
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_jsxri"]
 gradient = SubResource("Gradient_lo1wj")
 fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajxib"]
+bg_color = Color(0.8352941, 0.6901961, 0.5568628, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.03529412, 0.09019608, 0.15686275, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+expand_margin_left = 9.0
+expand_margin_top = 9.0
+expand_margin_right = 9.0
+expand_margin_bottom = 9.0
 
 [node name="Node2D" type="Node2D" unique_id=2078141277 node_paths=PackedStringArray("village_sprite1", "village_sprite2", "village_sprite3")]
 script = ExtResource("1_5sfjl")
@@ -255,15 +272,23 @@ position = Vector2(108, 175)
 scale = Vector2(4, 6.286)
 texture = SubResource("GradientTexture2D_jsxri")
 
-[node name="Button" type="Button" parent="." unique_id=702271463]
-offset_left = -52.0
-offset_top = -405.0
-offset_right = 54.0
-offset_bottom = -374.0
-text = "new turn  lol"
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=576630233]
 texture = ExtResource("14_vgks2")
+
+[node name="Button" type="Button" parent="." unique_id=702271463]
+offset_left = 742.0
+offset_top = 172.0
+offset_right = 946.0
+offset_bottom = 237.0
+theme_override_colors/font_color = Color(0.03529412, 0.09019608, 0.15686275, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_ajxib")
+text = "Конец хода"
+
+[node name="SidewidgetBg" type="Sprite2D" parent="." unique_id=499189357]
+visible = false
+position = Vector2(-106, -362)
+texture = ExtResource("18_gt4lb")
 
 [connection signal="gui_input" from="Card_graph_content" to="Card_graph_content" method="_on_gui_input"]
 [connection signal="mouse_entered" from="Card_graph_content" to="Card_graph_content" method="_on_mouse_entered"]

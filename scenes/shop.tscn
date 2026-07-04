@@ -37,6 +37,22 @@ shader_parameter/wave_speed = 1.0000000149012
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_elcfp"]
 gradient = SubResource("Gradient_lx5au")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_55mc6"]
+bg_color = Color(0.8352941, 0.6901961, 0.5568628, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.76862746, 0.60784316, 0.45882353, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+expand_margin_left = 9.0
+expand_margin_top = 9.0
+expand_margin_right = 9.0
+expand_margin_bottom = 9.0
+
 [node name="Shop" type="Node2D" unique_id=2134154319 node_paths=PackedStringArray("shop_container")]
 script = ExtResource("1_1l46r")
 shop_container = NodePath("Utimate_box_container")
@@ -68,6 +84,12 @@ offset_left = 1788.0
 offset_top = 540.0
 offset_right = 1906.0
 offset_bottom = 571.0
-text = "Leave shop lol"
+offset_transform_enabled = true
+offset_transform_position = Vector2(-250, 0)
+theme_override_colors/font_color = Color(0.03529412, 0.09019608, 0.15686275, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_55mc6")
+text = "Выйти из магазина"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
