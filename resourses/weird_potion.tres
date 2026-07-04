@@ -10,4 +10,5 @@ casting_type = 1
 name = "Странное зелье"
 duration = 1
 has_special_trigger = true
+hp = -5.0
 icon = ExtResource("1_r2vyn")

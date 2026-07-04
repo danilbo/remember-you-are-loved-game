@@ -48,10 +48,9 @@ func _ready() -> void:
 	
 	if true:
 		for i in range(0,16):
-			pass
-			deck.append(preload("res://resourses/knife.tres").duplicate())
-			deck.append(preload("res://resourses/kill.tres").duplicate())
-			#deck.append(main_node.shop_node.cards_list.pick_random().duplicate())
+			#deck.append(preload("res://resourses/knife.tres").duplicate())
+			#deck.append(preload("res://resourses/kill.tres").duplicate())
+			deck.append(main_node.shop_node.cards_list.pick_random().duplicate())
 
 func _process(delta: float) -> void:
 	if dead and not forever_end:
@@ -97,7 +96,7 @@ func change_characteristics(energy_delta : float = 0., mana_delta : float = 0., 
 	energy += energy_delta
 	mana += mana_delta
 	
-	if control_delta != 0. and not item_trigger("Стимулятор", false):
+	if control_delta != 0. and not item_trigger("Странное зелье", false):
 		control += control_delta
 		
 	hp += hp_delta
@@ -115,11 +114,11 @@ func change_characteristics(energy_delta : float = 0., mana_delta : float = 0., 
 	elif control <= 0:
 		die(1)
 	
-	print("energy = ", energy)
-	print("mana = ", mana)
-	print("control = ", control)
-	print("hp = ", hp)
-	print()
+	#print("energy = ", energy)
+	#print("mana = ", mana)
+	#print("control = ", control)
+	#print("hp = ", hp)
+	#print()
 
 
 func do_special_trigger(args : Array) -> void:
@@ -154,6 +153,7 @@ func do_special_trigger(args : Array) -> void:
 		change_characteristics(0,0,0,0, [-10, -5, 0].pick_random())
 	
 	if "mulligan" in args:
+		var cards_in_hand : int = len(hand_box_container.linked_nodes) - 1
 		for i : Card in main_node.card_array:
 			if i.logical_res.position == i.logical_res.POSITIONS.HAND:
 				for j in hand_box_container.linked_nodes:
@@ -164,7 +164,7 @@ func do_special_trigger(args : Array) -> void:
 				i.send_to_grave()
 					
 
-		for i in range(0,3):
+		for i in range(0, cards_in_hand):
 			draw_random_card()
 	
 	if "tornado" in args:
@@ -339,7 +339,7 @@ func new_turn() -> void:
 						i.logical_res.time_on_table = 0
 				
 				else:
-					current_deck_delta += 1
+					current_deck_delta -= 1
 			
 	if not deck_card_node.visible and not deck_node_show_seq and len(deletion_indexes) > 0:
 		if not only_passive_deleted:

@@ -18,6 +18,16 @@ class_name RootNode
 
 @export var main_node : Node2D
 
+@export_subgroup("Camp textures")
+@export var camp_texture1 : Texture2D
+@export var camp_texture2 : Texture2D
+@export var camp_texture3 : Texture2D
+
+@export_subgroup("Village textures")
+@export var village_texture1 : Texture2D
+@export var village_texture2 : Texture2D
+@export var village_texture3 : Texture2D
+
 var animation_aplpha_speed : float = 0.01
 var current_village_state : int = 1
 
@@ -164,3 +174,16 @@ func check_animations() -> bool:
 			return 0
 	
 	return 1
+
+
+func reassign_for_village_type():
+	match player_node_ext.village.type:
+		player_node_ext.village.VILLAGE_TYPE.CAMP:
+			village_sprite1.texture = camp_texture1
+			village_sprite2.texture = camp_texture2
+			village_sprite3.texture = camp_texture3
+			
+		player_node_ext.village.VILLAGE_TYPE.VILLAGE:
+			village_sprite1.texture = village_texture1
+			village_sprite2.texture = village_texture2
+			village_sprite3.texture = village_texture3

@@ -51,7 +51,10 @@ func spawn_random_card() -> void:
 	new_card.def_scale.x = new_scale
 	new_card.def_scale.y = new_scale
 	
+	
 	new_card.logical_res = cards_list.pick_random().duplicate()
+	
+	new_card.logical_res.base_cost = randi_range(1, 3)
 	
 	new_card.in_shop = true
 	
@@ -88,6 +91,8 @@ func close_shop():
 			i.disable_logic = true
 			i.termination_seq = true
 			i.termination_ticks = 50
+			
+		card_array.clear()
 
 func _on_button_pressed() -> void:
 	close_shop()

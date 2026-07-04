@@ -126,6 +126,12 @@ hero_card_texture = ExtResource("3_y3xxt")
 village_sprite1 = NodePath("village_sprite1")
 village_sprite2 = NodePath("village_sprite2")
 village_sprite3 = NodePath("village_sprite3")
+camp_texture1 = ExtResource("3_jh1ax")
+camp_texture2 = ExtResource("8_l5cgh")
+camp_texture3 = ExtResource("9_vgks2")
+village_texture1 = ExtResource("3_jh1ax")
+village_texture2 = ExtResource("8_l5cgh")
+village_texture3 = ExtResource("9_vgks2")
 
 [node name="Utimate_box_container" type="Node2D" parent="." unique_id=1842946502]
 position = Vector2(-125, 221)
@@ -156,19 +162,16 @@ script = ExtResource("6_y3xxt")
 [node name="village_sprite1" type="Sprite2D" parent="." unique_id=1890866233]
 material = SubResource("ShaderMaterial_jrhyn")
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("3_jh1ax")
 
 [node name="village_sprite2" type="Sprite2D" parent="." unique_id=977727631]
 z_index = -1
 material = SubResource("ShaderMaterial_gt4lb")
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("8_l5cgh")
 
 [node name="village_sprite3" type="Sprite2D" parent="." unique_id=1248172391]
 z_index = -2
 material = SubResource("ShaderMaterial_mflgo")
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("9_vgks2")
 
 [node name="Card_graph_content" type="SubViewportContainer" parent="." unique_id=997912437 node_paths=PackedStringArray("icon_texture_rect", "art_texture_rect", "card_contents", "shadow_node")]
 z_index = 1

@@ -26,6 +26,7 @@ var citizens_const : int = citizens
 var kill_on_that_turn : bool = false
 var unscheduled_dayoff : bool = false
 var confused : bool = false
+var ending_level : bool = false
 
 func _ready() -> void:
 	generate(1)
@@ -43,6 +44,7 @@ func load_from_res(resource : Village_resourse):
 	kill_on_that_turn = false
 	unscheduled_dayoff = false
 	confused = false
+	ending_level = false
 
 func generate(level : int):
 	current_panic = 0.
@@ -171,10 +173,13 @@ func kill_citizen(kill_type : KILL_TYPE, citizen_type = -1):
 	print("citizens left = ", citizens, "; farmers of them = ", farmers)
 	
 	
-	if citizens <= 0:
+	if citizens <= 0 and not ending_level:
+		ending_level = true
 		await get_tree().create_timer(0.5).timeout
 		%Player.main_node.end_level()
 
 func demolish_building(kill_type : KILL_TYPE):
 	for i in range(0, buildings_size):
 		kill_citizen(kill_type, -1)
+		if citizens <= 0:
+			break

@@ -10,4 +10,5 @@ casting_type = 1
 name = "Маскировка"
 duration = 9999
 has_special_trigger = true
+energy = -5.0
 icon = ExtResource("1_s184w")

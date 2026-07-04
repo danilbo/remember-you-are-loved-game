@@ -8,7 +8,7 @@ const TOOLTIP_SCENE = preload("res://game/ui/universal_tooltip/universal_tooltip
 
 @onready var hud_widget: HudWidget = $CanvasLayer/HudWidget
 
-var shop_chance : int = 50
+var shop_chance : int = 100
 var selected_dot_type : MapNode.DOT_TYPES
 var selected_village_resource : Village_resourse
 var temp_node_list : Array[MapNode] = []
@@ -138,7 +138,7 @@ func on_fade_change(show : bool, request_id : int):
 		else:
 			map_manager.hide()
 			shop_node.show()
-			shop_node.create_shop(13)
+			shop_node.create_shop(24)
 			shop_node.shop_close_in_progress = false
 			
 
@@ -195,6 +195,7 @@ func _handle_gameplay_select(node : MapNode):
 	selected_dot_type = node.dot_type
 	if node.dot_type == node.DOT_TYPES.LEVEL:
 		main_gameplay_node.player_node_ext.village.load_from_res(node.village_resource)
+		main_gameplay_node.reassign_for_village_type()
 
 
 func generate_new_nodes(no_shop : bool = false) -> void:

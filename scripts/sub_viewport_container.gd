@@ -296,7 +296,7 @@ func get_correct_mouse_delta() -> Vector2:
 
 
 func _on_gui_input(event: InputEvent) -> void:
-	if not disable_logic:
+	if not disable_logic and not player_node.dead:
 		if event.is_action_pressed("lmb") and in_shop and player_node.souls >= logical_res.base_cost:
 			player_node.souls -= logical_res.base_cost
 			player_node.change_characteristics()
