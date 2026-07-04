@@ -20,7 +20,7 @@ class_name Player
 @export var main_node : RootNode
 
 signal on_player_stats_change(hp : float, energy : float, control : float, mana : float, souls : int)
-
+signal on_player_death
 #var deck : Array[Logical_card] = [preload("res://resourses/steal_the_food.tres"), preload("res://resourses/food.tres").duplicate(),preload("res://resourses/beg_for_food.tres").duplicate(), preload("res://resourses/destroy_barn.tres").duplicate(), preload("res://resourses/master_the_panic.tres").duplicate(), preload("res://resourses/mulligan.tres"), preload("res://resourses/tornado.tres"), preload("res://resourses/amnezia.tres"), preload("res://resourses/memory_wipe.tres"), preload("res://resourses/confusion.tres"), preload("res://resourses/communicate.tres"), preload("res://resourses/rituallistic_kill.tres"), preload("res://resourses/kill.tres").duplicate(), preload("res://resourses/knife.tres").duplicate(), preload("res://resourses/campfire.tres").duplicate(), preload("res://resourses/shelter.tres").duplicate(), preload("res://resourses/godfist_save.tres").duplicate(), preload("res://resourses/panic_reduce.tres").duplicate(), preload("res://resourses/unscheduled_dayoff.tres").duplicate(), preload("res://resourses/clear_weather.tres").duplicate(), preload("res://resourses/lightning_bolt.tres").duplicate(), preload("res://resourses/storm.tres").duplicate()]#, preload("res://resourses/godlike_healing.tres").duplicate(), preload("res://resourses/godlike_healing.tres").duplicate()]
 var deck : Array[Logical_card] = []
 var current_deck_delta : int = 0
@@ -411,8 +411,7 @@ func die(ending : int):
 			return
 	
 	dead = true
-#	Хэнлить смерть ЗДЕСЬ
-	#main_node.end_level()
+	on_player_death.emit()
 
 
 func item_trigger(item_name : String, delete_item : bool = true) -> bool:

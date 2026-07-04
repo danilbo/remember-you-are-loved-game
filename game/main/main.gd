@@ -44,10 +44,12 @@ func game_start():
 
 func _subscribe_gameplay():
 	main_gameplay_node.player_node_ext.on_player_stats_change.connect(player_stats_updated)
+	main_gameplay_node.player_node_ext.on_player_death.connect(_handle_player_death)
 	main_gameplay_node.on_level_end.connect(on_level_end)
 	main_gameplay_node.on_card_hovered.connect(_handler_on_card_hover)
 	main_gameplay_node.on_card_unhovered.connect(_handler_on_card_unhover)
 	main_gameplay_node.on_village_stats_change.connect(_handle_on_village_stats_change)
+	
 
 func _subscribe_shop():
 	shop_node.on_card_hovered.connect(_handler_on_card_hover)
@@ -191,6 +193,15 @@ func _handle_on_shop_close() -> void:
 	generate_new_nodes(true)
 
 func _handle_screen_overflow():
+#	delete this and signals
+	pass
+
+func _handle_player_death():
+	await do_change_screen_logic(false)
+	show_event_window()
+	do_change_screen_logic(true)
+
+func show_event_window():
 	pass
 
 func on_level_end() -> void:
