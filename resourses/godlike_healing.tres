@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="Logical_card" load_steps=3 format=3 uid="uid://2j27ksdtu7h2"]
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://2j27ksdtu7h2"]
 
 [ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="1_71cdv"]
 [ext_resource type="Texture2D" uid="uid://qt8jf22wtmwy" path="res://sprites/IMG_3407.PNG" id="1_rrgx4"]
 
 [resource]
 script = ExtResource("1_71cdv")
-dumb_card = true
 name = "Божественное исцеление"
+desctiption = "HP: + +
+Мана: - -"
 hp = 30.0
 mana = -20.0
 icon = ExtResource("1_rrgx4")

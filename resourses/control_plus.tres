@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="Logical_card" load_steps=3 format=3 uid="uid://cm0q733atypyk"]
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://cm0q733atypyk"]
 
 [ext_resource type="Texture2D" uid="uid://bsi51j7dolex4" path="res://sprites/IMG_3401.PNG" id="1_6ryyc"]
 [ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="2_u7lu4"]
 
 [resource]
 script = ExtResource("2_u7lu4")
-dumb_card = true
 name = "Усиление контроля"
+desctiption = "Контроль: + +
+Мана: - -"
 control = 15.0
 mana = -20.0
 icon = ExtResource("1_6ryyc")

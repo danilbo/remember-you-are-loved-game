@@ -6,6 +6,9 @@
 [resource]
 script = ExtResource("1_r0n5w")
 name = "Торнадо"
+desctiption = "Уничтожает от 1, до половины домов, имеет 50% шанс пройти мимо, гарантировано заденет игрока, если у него не построено убежище
+HP: ?
+Мана: - - -"
 mana = -35.0
 special_triggers = ["tornado"]
 icon = ExtResource("1_3dc3d")

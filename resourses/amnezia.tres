@@ -7,6 +7,8 @@
 script = ExtResource("2_qcpir")
 casting_type = 1
 name = "Точечная амнезия"
+desctiption = "Все местные проигнорируют следующее убийство на этом ходу
+Мана: -"
 duration = 1
 has_special_trigger = true
 mana = -7.0

@@ -3,6 +3,10 @@ extends Node2D
 const MAP_MANAGER_SCENE = preload("res://game/map/map_manager/map_manager.tscn")
 const TOOLTIP_SCENE = preload("res://game/ui/universal_tooltip/universal_tooltip.tscn")
 
+@export var camp_icon : Texture
+@export var village_icon : Texture
+@export var shop_icon : Texture
+
 @export var main_gameplay_node : RootNode
 @export var shop_node : Node2D
 
@@ -24,6 +28,8 @@ func _ready() -> void:
 	spawn_map_manager()
 	var new_node = map_manager.spawn_next_nodes(1)
 	map_manager.gameplay_node_selected.connect(_handle_gameplay_select)
+	
+	new_node[0].data.icon = camp_icon
 	new_node[0].village_resource.generate(GlobalVariables.current_level)
 	new_node[0].data.description = new_node[0].village_resource.get_desc()
 	new_node[0].data.title = new_node[0].village_resource.get_village_name()
@@ -162,6 +168,7 @@ func player_stats_updated(hp : float, energy : float, control : float, mana : fl
 		hud_widget.set_control_value(control)
 		
 	hud_widget.set_soul_value(souls)
+	hud_widget.set_hourglass_value(GlobalVariables.current_turn)
 
 
 func _handle_on_shop_close() -> void:
@@ -206,6 +213,7 @@ func _handle_gameplay_select(node : MapNode):
 func generate_new_nodes(no_shop : bool = false) -> void:
 	var new_nodes : Array[MapNode] = map_manager.spawn_next_nodes(3)
 	
+	
 	if GlobalVariables.current_level > 2:
 		if not no_shop:
 			var chance : int = randi_range(0, 100)
@@ -221,6 +229,10 @@ func generate_new_nodes(no_shop : bool = false) -> void:
 		if i.dot_type != MapNode.DOT_TYPES.SHOP:
 			if GlobalVariables.current_level > 7:
 				i.village_resource.type = Village_resourse.VILLAGE_TYPE.VILLAGE
+				i.data.icon = village_icon
+			
+			else:
+				i.data.icon = camp_icon
 			
 			i.village_resource.generate(GlobalVariables.current_level)
 			i.data.description = i.village_resource.get_desc()
@@ -228,5 +240,6 @@ func generate_new_nodes(no_shop : bool = false) -> void:
 			
 		
 		else:
+			i.data.icon = shop_icon
 			i.data.description = "Тут можно навсегда получить карты за души!"
 			i.data.title = "Магазин"

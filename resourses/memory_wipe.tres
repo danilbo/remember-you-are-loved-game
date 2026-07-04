@@ -7,6 +7,8 @@
 script = ExtResource("2_xk7ng")
 casting_type = 1
 name = "Стирание памяти"
+desctiption = "Все местные игнорируют все убийства на этом ходу
+Мана: - - -"
 duration = 1
 has_special_trigger = true
 mana = -40.0

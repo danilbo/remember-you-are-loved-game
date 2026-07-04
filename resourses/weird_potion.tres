@@ -8,6 +8,8 @@ script = ExtResource("2_a75q8")
 type = 2
 casting_type = 1
 name = "Странное зелье"
+desctiption = "На этом ходу персонаж не может терять или получать контроль
+HP: -"
 duration = 1
 has_special_trigger = true
 hp = -5.0

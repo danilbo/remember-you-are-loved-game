@@ -1,12 +1,14 @@
-[gd_resource type="Resource" script_class="Logical_card" load_steps=3 format=3 uid="uid://j8v72qvcayvo"]
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://j8v72qvcayvo"]
 
 [ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="1_6tvg6"]
 [ext_resource type="Texture2D" uid="uid://c1jo6o17y7q8c" path="res://sprites/IMG_3396.PNG" id="1_immtr"]
 
 [resource]
 script = ExtResource("1_6tvg6")
-dumb_card = true
 name = "Удар молнии"
+desctiption = "Имеет 5% шанс ударить в персонажа, 70% убить случайного человека и 25% шанс уничтожить дом
+HP: ?
+Мана: -"
 mana = -10.0
 special_triggers = ["bolt"]
 icon = ExtResource("1_immtr")

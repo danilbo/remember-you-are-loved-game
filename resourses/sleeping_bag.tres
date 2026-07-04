@@ -8,6 +8,11 @@ script = ExtResource("2_qrrfs")
 type = 2
 casting_type = 1
 name = "Спальный мешок"
+desctiption = "Действует 3 хода
+Энергия: +
+Контроль: +
+При касте:
+Энергия: -"
 duration = 3
 energy = -5.0
 energy_buff = 5.0

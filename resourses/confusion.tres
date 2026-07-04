@@ -7,6 +7,9 @@
 script = ExtResource("1_g3nwm")
 casting_type = 1
 name = "Оконфуживание"
+desctiption = "Все события, которые влияют на панику, инвертируются, кроме событий, следующих из паники
+Длительность: 1 ход
+Мана: - -"
 duration = 1
 has_special_trigger = true
 mana = -25.0

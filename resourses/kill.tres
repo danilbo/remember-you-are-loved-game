@@ -8,6 +8,11 @@ script = ExtResource("1_j7uoq")
 risk_level = 2
 type = 1
 name = "Убийство"
+desctiption = "Убивает случайного человека
+Контроль - -
+Энергия -
+Паника: + +
+Уровень риска: 3"
 energy = -10.0
 control = -15.0
 kills = 1

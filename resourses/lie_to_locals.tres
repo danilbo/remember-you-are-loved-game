@@ -8,6 +8,10 @@ script = ExtResource("1_4wqht")
 risk_level = 1
 type = 1
 name = "Отвести взгляд"
+desctiption = "Контроль: -
+Энергия: - -
+Паника: -
+Уровень риска: 2"
 energy = -10.0
 control = -5.0
 panic = -10.0

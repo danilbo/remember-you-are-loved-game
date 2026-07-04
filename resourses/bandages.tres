@@ -7,5 +7,6 @@
 script = ExtResource("2_rrbhy")
 type = 2
 name = "Бинты"
+desctiption = "HP: +"
 hp = 10.0
 icon = ExtResource("1_0o8tt")

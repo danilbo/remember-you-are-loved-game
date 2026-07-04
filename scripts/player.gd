@@ -9,6 +9,7 @@ class_name Player
 @export var mana : float = 100.
 @export var hand_size : int = 8 #max = 8
 @export var souls : int = 0
+@export var turns_to_die : int = 100
 
 @export_subgroup("Node Links")
 @export var hand_box_container : Node2D
@@ -48,7 +49,7 @@ func _ready() -> void:
 	
 	if true:
 		for i in range(0,16):
-			#deck.append(preload("res://resourses/knife.tres").duplicate())
+			#deck.append(preload("res://resourses/destroy_barn.tres").duplicate())
 			#deck.append(preload("res://resourses/kill.tres").duplicate())
 			deck.append(main_node.shop_node.cards_list.pick_random().duplicate())
 
@@ -114,11 +115,6 @@ func change_characteristics(energy_delta : float = 0., mana_delta : float = 0., 
 	elif control <= 0:
 		die(1)
 	
-	#print("energy = ", energy)
-	#print("mana = ", mana)
-	#print("control = ", control)
-	#print("hp = ", hp)
-	#print()
 
 
 func do_special_trigger(args : Array) -> void:
@@ -240,7 +236,7 @@ func interact_with_village(kills : int, demolish_houses : int, kill_type, panic_
 				change_characteristics(10)
 				
 			if item_trigger("Ритуальный нож"):
-				change_characteristics(0, 5)
+				change_characteristics(0, 6)
 				
 		if item_trigger("Точечная амнезия"):
 			kill_type = Village.KILL_TYPE.IGNORE
@@ -265,6 +261,11 @@ func interact_with_village(kills : int, demolish_houses : int, kill_type, panic_
 func new_turn() -> void:
 	if not main_node.check_animations() or need_to_draw_cards or new_turn_cooldown > 0 or dead:
 		return
+	
+	if turns_to_die <= GlobalVariables.current_turn:
+		die(3)
+	
+	GlobalVariables.current_turn += 1
 	
 	new_turn_cooldown = new_turn_cooldown_const
 	
@@ -430,6 +431,7 @@ func item_trigger(item_name : String, delete_item : bool = true) -> bool:
 func obtain_soul() -> void:
 	souls += 1
 	on_player_stats_change.emit(hp, energy, control, mana, souls)
+
 
 func _on_button_pressed() -> void:
 	new_turn()

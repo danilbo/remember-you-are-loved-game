@@ -8,6 +8,14 @@ script = ExtResource("2_7fyma")
 risk_level = 2
 type = 1
 name = "Проповедовать"
+desctiption = "Возможно людям это не понравится
+HP: ?
+Контроль: +
+Энергия: - -
+Паника: +
+Мана: +
+Уровень риска: 3
+"
 energy = 15.0
 control = 5.0
 mana = 10.0

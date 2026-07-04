@@ -151,7 +151,7 @@ func kill_citizen(kill_type : KILL_TYPE, citizen_type = -1):
 				print("farmer killed")
 	
 	#print(float(kill_type) * (float(citizens_const) / float(citizens)))
-	%Player.change_characteristics(0, 2.)
+	%Player.change_characteristics(0, 3.5)
 	%Player.obtain_soul()
 	
 	if citizens != 0:

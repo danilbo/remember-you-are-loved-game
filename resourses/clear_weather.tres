@@ -7,6 +7,13 @@
 script = ExtResource("1_u7kqu")
 casting_type = 1
 name = "Хорошая погода"
+desctiption = "Пассивный бафф на 2 хода, уничтожается после любой карты с плохой погодой
+При разыгрывании:
+Мана: -
+Бафф:
+Паника: -
+Контроль: +
+"
 duration = 2
 mana = -15.0
 special_triggers = ["good_weather"]

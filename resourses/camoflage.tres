@@ -8,6 +8,8 @@ script = ExtResource("1_pjs7k")
 type = 2
 casting_type = 1
 name = "Маскировка"
+desctiption = "Одноразовый
+Любое убийство, которое совершил персонаж будет считаться случайностью"
 duration = 9999
 has_special_trigger = true
 energy = -5.0

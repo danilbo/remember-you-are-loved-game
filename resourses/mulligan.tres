@@ -6,6 +6,8 @@
 [resource]
 script = ExtResource("1_dst6g")
 name = "Смена планов"
+desctiption = "Сбросьте руку и возьмите на 1 карту меньше
+Мана: -"
 mana = -10.0
 special_triggers = ["mulligan"]
 icon = ExtResource("1_jj5ia")

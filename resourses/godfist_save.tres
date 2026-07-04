@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Logical_card" load_steps=3 format=3 uid="uid://bij31duktyqim"]
+[gd_resource type="Resource" script_class="Logical_card" format=3 uid="uid://bij31duktyqim"]
 
 [ext_resource type="Script" uid="uid://cd03sjxsfl63x" path="res://scripts/card.gd" id="1_im26j"]
 [ext_resource type="Texture2D" uid="uid://ymgj8artvw0n" path="res://sprites/IMG_3410.PNG" id="1_xis3a"]
@@ -7,6 +7,7 @@
 script = ExtResource("1_im26j")
 casting_type = 1
 name = "Спасение"
+desctiption = "Если герой умирает на этом ходу, то вместо этого воскресить его с 10 HP и максимальным контролем, паника при этом - -"
 duration = 1
 has_special_trigger = true
 mana = -10.0
